@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for Elion project.
 
@@ -38,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'phonenumber_field',
     'easy_thumbnails',
 
+    'accounts',
     'services',
 ]
 
@@ -110,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -126,6 +129,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 
+# Конфигурации миниатюр
+
 THUMBNAIL_BASEDIR = "thumbnails"
 THUMBNAIL_DEFAULT_OPTIONS = {"crop": "smart"}
 THUMBNAIL_ALIASES = {
@@ -133,3 +138,7 @@ THUMBNAIL_ALIASES = {
         "srvc": {"size": (150, 150)}
     }
 }
+
+AUTH_USER_MODEL = 'accounts.User'
+
+PHONENUMBER_DB_FORMAT = 'E164'

@@ -4,6 +4,7 @@ from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 from easy_thumbnails.files import get_thumbnailer
 
+
 class Service(models.Model):
     title = models.CharField(max_length=50, unique=True, verbose_name='Заголовок')
     content = models.TextField(verbose_name='Содержание')
