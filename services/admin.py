@@ -9,9 +9,9 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display = ['title', 'content', 'img']
     readonly_fields = ('image_thumb',)
     fieldsets = [
-        (None,                  {'fields':['title']}),
-        (None,                  {'fields':['content']}),
-        ('Изображение',         {'fields':[( 'image_thumb','img')]})
+        (None,                  {'fields': ['title']}),
+        (None,                  {'fields': ['content']}),
+        ('Изображение',         {'fields': [('image_thumb', 'img')]})
     ]
 
     def image_thumb(self, obj):
