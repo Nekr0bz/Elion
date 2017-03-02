@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content', 'img']
+    list_display = ['title', 'content']
     readonly_fields = ('image_thumb',)
     fieldsets = [
         (None,                  {'fields': ['title']}),

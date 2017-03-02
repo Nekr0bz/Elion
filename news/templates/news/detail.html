@@ -1,0 +1,7 @@
+<p>{{ object.usr.email }}</p>
+<p>{{ object.datetime }}</p>
+<h2>{{ object.title }}</h2>
+<h4>{{ object.description }}</h4>
+{% autoescape off %}
+    <p>{{ object.content }}</p>
+{% endautoescape %}
