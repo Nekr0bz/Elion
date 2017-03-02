@@ -22,6 +22,7 @@ def del_img_pre_del_service(sender, instance, **kwargs):
     get_thumbnailer(instance.img).delete_thumbnails()
     instance.img.delete(save=False)
 
+
 @receiver(pre_save, sender=Service)
 def del_img_pre_save_service(sender, instance, **kwargs):
     try:
