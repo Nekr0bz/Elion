@@ -13,19 +13,15 @@ class News(models.Model):
     title = models.CharField('Заголовок', max_length=80, unique_for_date='datetime')
     description = models.TextField('Краткое описание', max_length=200)
     content = RichTextField(verbose_name='Основной контент')
-    datetime = models.DateTimeField('Опубликована', default=timezone.now(), db_index=True)
+    datetime = models.DateTimeField('Опубликована', db_index=True)
     slug = models.SlugField(unique=True)
 
+    def __unicode__(self):
+        return self.title
+
     class Meta:
-        verbose_name = 'Новости'
+        db_table = 'News'
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
         ordering = ['-datetime']
 
-
-@receiver(pre_save, sender=News)
-def slug_correction_pre_save_news(sender, instance, **kwargs):
-    # TODO: News -> sender
-    qs = News.objects.filter(slug=instance.slug)
-    if qs.exists():
-        count = qs.count()
-        n = len(str(count-1))  # разрядность
-        instance.slug = instance.slug[:-n] + count if count > 1 else instance.slug + '-'+count
