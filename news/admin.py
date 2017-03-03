@@ -4,7 +4,7 @@ from models import News
 
 
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ['usr', 'title', 'datetime']
+    list_display = ['title', 'datetime']
     prepopulated_fields = {"slug": ("title",)}
 
 admin.site.register(News, NewsAdmin)

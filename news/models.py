@@ -7,7 +7,6 @@ from accounts.models import User
 
 
 class News(models.Model):
-    usr = models.ForeignKey(User, verbose_name='Пользователь')
     title = models.CharField('Заголовок', max_length=80, unique_for_date='datetime')
     description = models.TextField('Краткое описание', max_length=200)
     content = RichTextUploadingField(verbose_name='Основной контент')
