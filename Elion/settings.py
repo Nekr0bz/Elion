@@ -28,14 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'phonenumber_field',
-    'easy_thumbnails',
-    'ckeditor',
-    'ckeditor_uploader',
+    'phonenumber_field', 'easy_thumbnails', 'ckeditor', 'ckeditor_uploader',
 
-    'accounts',
-    'services',
-    'news',
+    'accounts', 'services', 'news', 'guestbook',
 ]
 
 MIDDLEWARE = [

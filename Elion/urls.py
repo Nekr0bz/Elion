@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^services/', include('services.urls', namespace='services')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^news/', include('news.urls', namespace='news')),
+    url(r'^guestbook/', include('guestbook.urls', namespace='guestbook')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

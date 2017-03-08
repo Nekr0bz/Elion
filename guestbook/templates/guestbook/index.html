@@ -1,0 +1,12 @@
+<form method="post">
+    {% csrf_token %}
+    <p>{{ form.text }}</p>
+    <input type="submit">
+</form>
+
+{% for object in latest %}
+    <p>{{ object.text }}</p>
+    <p>{{ object.datetime }}</p>
+    <p>{{ object.usr }}</p>
+    <hr>
+{% endfor %}
