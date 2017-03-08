@@ -11,7 +11,7 @@ class GuestBookView(ArchiveIndexView):
     date_field = 'datetime'
     allow_empty = True
     form = None
-    # TODO: добавить пагинацию
+    paginate_by = 5
 
     def get(self, request, *args, **kwargs):
         self.form = GuestBookForm()
