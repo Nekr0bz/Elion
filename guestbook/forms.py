@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from models import GuestBook
+from .models import GuestBook
 
 
 class GuestBookForm(forms.ModelForm):

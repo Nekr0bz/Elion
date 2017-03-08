@@ -1,7 +1,7 @@
 from django.views.generic.dates import ArchiveIndexView
 from django.views.generic.detail import DetailView
 
-from models import News
+from .models import News
 
 
 class NewsListViews(ArchiveIndexView):

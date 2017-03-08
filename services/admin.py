@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import Service
-from easy_thumbnails.files import get_thumbnailer
 from django.utils.safestring import mark_safe
+from easy_thumbnails.files import get_thumbnailer
+
+from .models import Service
 from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 class ServiceAdmin(admin.ModelAdmin):
