@@ -1,5 +1,4 @@
 .idea
-migrations
 static/vendors
 db.sqlite3
 __pycache__
