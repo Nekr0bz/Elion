@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 
     'phonenumber_field', 'easy_thumbnails', 'ckeditor', 'ckeditor_uploader',
 
-    'accounts', 'services', 'news', 'guestbook',
+    'accounts', 'services', 'news', 'guestbook', 'about',
 ]
 
 MIDDLEWARE = [
