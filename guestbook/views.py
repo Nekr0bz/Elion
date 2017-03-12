@@ -27,11 +27,9 @@ class GuestBookView(ArchiveIndexView):
             'usr': request.user.id,
             'text': str(request.POST['text'].encode('utf-8'))
         }
-        print (form_data)
         self.form = GuestBookForm(form_data)
         if self.form.is_valid():
             self.form.save()
             return redirect('guestbook:index')
         else:
-            print ('не валидна')
             return super(GuestBookView, self).get(request, *args, **kwargs)
