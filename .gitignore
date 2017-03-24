@@ -1,5 +1,6 @@
 .idea
 static/vendors
+*/static/vendors
 db.sqlite3
 __pycache__
 *.pyc

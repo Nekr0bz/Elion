@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-тест
-</body>
-</html>
+{% extends "main/main.html" %}
+{% load staticfiles %}
+{% block title %}Главная страница{% endblock %}
+{% block add_css %}
+    <!-- owl-carousel css -->
+    <link href="{% static 'vendors/css/owl.theme.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/css/owl.carousel.css' %}" rel="stylesheet">
+    <!-- Custom Css -->
+    <link href="{% static 'vendors/css/custom/style.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/css/responsive/responsive.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body_class %}"home"{% endblock %}
+
+{% block content %}
+    ГЛАВНАЯ СТРАНИЦА
+{% endblock %}
+
+{% block add_js %}
+    <!-- owl-carousel -->
+    <script type="text/javascript" src="{% static 'vendors/js/owl.carousel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/js/owl-custom.js' %}"></script>
+    <!-- Custom & Vendor js -->
+    <script type="text/javascript" src="{% static 'vendors/js/custom.js' %}"></script>
+{% endblock %}
