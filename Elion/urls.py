@@ -2,7 +2,10 @@ from django.conf.urls import url, include, static
 from django.contrib import admin
 from . import settings
 
+from main import views
+
 urlpatterns = [
+    url(r'^$', views.MainPageView.as_view(), name='main'),
     url(r'^admin/', admin.site.urls),
     url(r'^services/', include('services.urls', namespace='services')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
