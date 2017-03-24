@@ -8,10 +8,12 @@
 ```sh
 $ git clone https://github.com/Nekr0bz/Elion.git
 ```
-Для работы проекта необходимо установить дополнительные модули, перечисленные в файле `requirements.txt`:
+**Для работы проекта необходимо:** 
+1) Установить дополнительные модули, перечисленные в файле `requirements.txt`:
 ```sh
 $ pip install -r requirements.txt
 ```
+2) Переместить содержимое директории [Elion-vendors](https://github.com/Nekr0bz/Elion-vendors) в папку проекта.
 ### База данных
 Создаем базу данных на SQLite:
 ```sh
