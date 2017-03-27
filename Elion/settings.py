@@ -2,6 +2,12 @@
 
 import os
 
+try:
+    from private_settings import *
+except ImportError:
+    msg = 'Конфигурации для SMTP скрыты.'
+    print (msg)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -136,4 +142,3 @@ PHONENUMBER_DB_FORMAT = 'E164'
 CKEDITOR_JQUERY_URL = os.path.join(BASE_DIR, 'static/vendors/js/JQuery/jquery-3.1.1.min.js')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
-

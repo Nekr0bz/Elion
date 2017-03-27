@@ -25,7 +25,7 @@ class GuestBookView(ArchiveIndexView):
     def post(self, request, *args, **kwargs):
         form_data = {
             'usr': request.user.id,
-            'text': str(request.POST['text'].encode('utf-8'))
+            'text': request.POST['text'].encode('utf-8')
         }
         self.form = GuestBookForm(form_data)
         if self.form.is_valid():

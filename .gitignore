@@ -5,3 +5,4 @@ db.sqlite3
 __pycache__
 *.pyc
 media
+/Elion/private_settings.py
