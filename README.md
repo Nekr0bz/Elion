@@ -28,3 +28,7 @@ $ python manage.py createsuperuser
 ```sh
 $ python manage.py runserver
 ```
+### Настройка
+Для работоспособности формы отправки сообщений на электронную почту, необходимо в файле `Elion/settings.py` 
+настроить SMTP бекенд, который установлен по умолчанию 
+([см. документацию](https://docs.djangoproject.com/en/1.10/topics/email/#smtp-backend)).
