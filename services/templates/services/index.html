@@ -1,8 +1,12 @@
+{% extends "main/main.html" %}
 {% load thumbnail %}
-{% for object in object_list %}
-    <h2>{{object.title}}</h2>
-    <h4>{{ object.content }}</h4>
-    <a href="{{ object.img.url }}">
-        <img src="{% thumbnail object.img "srvc" %}" alt="">
-    </a>
-{% endfor %}
+{% block title %}Услуги{% endblock %}
+{% block content %}
+    {% for object in object_list %}
+        <h2>{{object.title}}</h2>
+        <h4>{{ object.content }}</h4>
+        <a href="{{ object.img.url }}">
+            <img src="{% thumbnail object.img "srvc" %}" alt="">
+        </a>
+    {% endfor %}
+{% endblock %}

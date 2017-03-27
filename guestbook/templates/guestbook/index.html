@@ -1,37 +1,41 @@
-<form method="post">
-    {% csrf_token %}
-    <p>{{ form.text }}</p>
-    <input type="submit">
-</form>
+{% extends "main/main.html" %}
+{% block title %}Отзывы{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ form.text }}</p>
+        <input type="submit">
+    </form>
 
-{% for object in latest %}
-    <p>{{ object.text }}</p>
-    <p>{{ object.datetime }}</p>
-    <p>{{ object.usr }}</p>
-    <hr>
-{% endfor %}
+    {% for object in latest %}
+        <p>{{ object.text }}</p>
+        <p>{{ object.datetime }}</p>
+        <p>{{ object.usr }}</p>
+        <hr>
+    {% endfor %}
 
-{% if paginator.num_pages > 1 %}
+    {% if paginator.num_pages > 1 %}
 
-    {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number}}">&lt;</a>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number}}">&lt;</a>
+        {% endif %}
+
+          {% for pn in paginator.page_range %}
+            {% if not forloop.first %}
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+            {% endif %}
+            {% if page_obj.number != pn %}
+              <a href="?page={{ pn }}">
+            {% endif %}
+            {{ pn }}
+            {% if page_obj.number != pn %}
+              </a>
+            {% endif %}
+          {% endfor %}
+
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        {% endif %}
+
     {% endif %}
-
-      {% for pn in paginator.page_range %}
-        {% if not forloop.first %}
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-        {% endif %}
-        {% if page_obj.number != pn %}
-          <a href="?page={{ pn }}">
-        {% endif %}
-        {{ pn }}
-        {% if page_obj.number != pn %}
-          </a>
-        {% endif %}
-      {% endfor %}
-
-    {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
-    {% endif %}
-
-{% endif %}
+{% endblock %}

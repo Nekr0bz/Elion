@@ -1,7 +1,11 @@
-{% for object in latest %}
-    <p>{{ object.usr.email }}</p>
-    <p>{{ object.datetime }}</p>
-    <a href="{{ object.get_absolute_url }}"><h2>{{ object.title }}</h2></a>
-    <h4>{{ object.description }}</h4>
-    <hr>
-{% endfor %}
+{% extends "main/main.html" %}
+{% block title %}Новости{% endblock %}
+{% block content %}
+    {% for object in latest %}
+        <p>{{ object.usr.email }}</p>
+        <p>{{ object.datetime }}</p>
+        <a href="{{ object.get_absolute_url }}"><h2>{{ object.title }}</h2></a>
+        <h4>{{ object.description }}</h4>
+        <hr>
+    {% endfor %}
+{% endblock %}

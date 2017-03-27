@@ -11,6 +11,8 @@
 
     <title>{% block title %}{% endblock %} :: Элион</title>
 
+    <link rel="icon" type="image/png"  href="{% static 'main/img/icon.png'%}">
+
     <!-- Bootstrap -->
     <link href="{% static 'vendors/css/bootstrap/bootstrap.css' %}" rel="stylesheet">
 
@@ -26,6 +28,10 @@
 
     {% block add_css %}{% endblock %}
 
+    <!-- Custom Css -->
+    <link href="{% static 'vendors/css/custom/style.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/css/responsive/responsive.css' %}" rel="stylesheet">
+
     <!--[if lt IE 9]>
         <script src="{% static 'vendors/js/html5shiv.js' %}"></script>
     <![endif]-->
@@ -33,7 +39,7 @@
 <body class={% block body_class %}{% endblock %}>
 <!-- =======Header ======= -->
 		<header>
-			<div class="container-fluid top_header">
+			<!--div class="container-fluid top_header">
 				<div class="container">
 					<p class="float_left">Welcome to Me Financial Services, we have over 12 years of expertise</p>
 					<div class="float_right">
@@ -50,13 +56,13 @@
 							</li>
 						</ul>
 					</div>
-				</div> <!-- end container -->
+				</div> <!-- end container >
 			</div><!-- end top_header -->
 			<div class="bottom_header top-bar-gradient">
 				<div class="container clear_fix">
 					<div class="float_left logo">
-						<a href="index.html">
-							<img src="images/logo.png" alt="Elion">
+						<a href="{% url 'main' %}">
+							<img src="{% static 'main/img/logo.png' %}" alt="Элоион СПБ" >
 						</a>
 					</div>
 					<div class="float_right address">
@@ -65,7 +71,7 @@
 								<span class=" icon icon-Pointer"></span>
 							</div>
 							<div class="content-box">
-								<p> 13005 Greenville Avenue <br><span>California, TX 70240</span></p>
+								<p> 195252, г Санкт-Петербург<br><span>ул. Карпинского, 20 лит.а, пом. 4-н</span></p>
 							</div>
 						</div>
 						<div class="top-info">
@@ -73,7 +79,7 @@
 								<span class="separator icon icon-Phone2"></span>
 							</div>
 							<div class="content-box">
-								<p>+ (1800) 456 7890 <br><span>info@mefinance.com</span></p>
+								<p>+7 (000) 000 00 00 <br><span>info@test.com</span></p>
 							</div>
 						</div>
 						<div class="top-info">
@@ -81,7 +87,7 @@
 								<span class="separator icon icon-Timer"></span>
 							</div>
 							<div class="content-box">
-								<p>Mon - Sat 9.00 - 19.00 <br><span>Sunday Closed</span></p>
+								<p>пн - вс 9.00 - 21.00 <br><span>Без обеда и выходных</span></p>
 							</div>
 						</div>
 					</div>
@@ -103,72 +109,16 @@
 				    </div>
 					<div class="nav_main_list custom-scroll-bar pull-left" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav" id="hover_slip">
-							<li><a href="index.html">Home</a></li>
-							<li class="arrow_down"><a href="about.html">About Us</a>
-								<div class="sub-menu">
-									<ul>
-										<li><a href="advisor.html">Advisor</a></li>
-										<li><a href="single-advisor.html">Single Advisor</a></li>
-										<li><a href="career.html">Career</a></li>
-										<li><a href="testimonial.html">Testimonaials</a></li>
-										<li><a href="partners.html">partners</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="arrow_down"><a href="service.html">Services</a>
-								<div class="sub-menu">
-									<ul>
-										<li><a href="service2.html">Service Two</a></li>
-										<li><a href="pricing-page.html">Pricing Page</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="arrow_down" ><a href="#">Pages</a>
-								<div class="sub-menu">
-									<ul>
-										<li><a href="404.html">404 Page</a></li>
-										<li><a href="no-search-results.html">No Search Result</a></li>
-										<li><a href="search-results.html">Search Results</a></li>
-										<li><a href="faq.html">FAQ</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="arrow_down" ><a href="portfolio.html">Projects</a>
-								<div class="sub-menu">
-									<ul>
-										<li><a href="portfolio.html">Portfolio One</a></li>
-										<li><a href="portfolio2.html">Portfolio Two</a></li>
-										<li><a href="portfolio3.html">Portfolio Three</a></li>
-										<li><a href="portfolio4.html">Portfolio Four</a></li>
-										<li><a href="portfolio5.html">Portfolio Five</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="arrow_down" ><a href="blog-leftside-bar.html">Blogs</a>
-								<div class="sub-menu">
-									<ul>
-										<li><a href="blog-leftside-bar.html">Blog Left Bar</a></li>
-										<li><a href="blog-rightside-bar.html">Blog Right Bar</a></li>
-										<li><a href="blog-single-column.html">T H E M E L O C K . C O M</a></li>
-										<li><a href="blog-two-column.html">Blog Two Col</a></li>
-										<li><a href="blog-details.html">Blog Details</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="arrow_down" ><a href="shop-page.html">Shop</a>
-								<div class="sub-menu">
-									<ul>
-										<li><a href="product-details.html">Product Details</a></li>
-										<li><a href="cart-page.html">Cart Page</a></li>
-										<li><a href="checkout-page.html">Checkout Page</a></li>
-									</ul>
-								</div>
-							</li>
-							<li><a class="contact" href="contact-us.html">Contact Us</a></li>
+							<li><a href="{% url 'main' %}">Главная</a></li>
+							<li><a href="{% url 'services:index' %}">Услуги</a></li>
+                            <li><a href="{% url 'main' %}">О компании</a></li>
+                            <li><a href="{% url 'news:index' %}">Новости</a></li>
+							<li><a href="{% url 'guestbook:index' %}">Отзывы</a></li>
+							<li><a href="{% url 'main' %}">Контакты</a></li>
 						</ul>
 					</div>
 					<div class="find-advisor pull-right">
-						<a href="advisor.html" class="advisor ">Find Advisor</a>
+						<a href="{% url 'main' %}" class="advisor ">Оставить заявку</a>
 					</div>
 				</nav> <!-- End Nav -->
 			</div> <!-- End Container -->
@@ -180,61 +130,17 @@
 <!-- ============ free consultation ================ -->
 		<section class="container-fluid consultation">
 			<div class="container text-center">
-				<p>If you have any querry for related investment  ... We are available</p>
-				<a href="">Contact us <i class="fa fa-arrow-circle-right"></i></a>
+				<p>Напишите нам, мы всегда доступны для вас!</p>
+				<a href="">Оставить заявку<i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</section> <!-- End consultation -->
 <!-- ============ /free consultation ================ -->
 
 <!-- ============= Footer ================ -->
 		<footer>
-			<div class="top_footer container-fluid">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-12 part1">
-							<a href=""><img src="images/logo-footer.png" alt="Logo"></a>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ali qua. </p>
-							<p><i class="fa fa-phone"></i>&nbsp;&nbsp; 1800 - 254 - 9874</p>
-							<p>contact@mefinance.com</p>
-							<ul class="p0">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-skype"></i></a></li>
-							</ul>
-						</div>
-						<div class="col-lg-2 col-md-3 col-sm-12 part2">
-							<h5>Our Services</h5>
-							<ul class="p0">
-								<li><a href=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;Investment Planning</a></li>
-								<li><a href=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;Retairment Planning</a></li>
-								<li><a href=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;Mutial Funds</a></li>
-								<li><a href=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;Saving & Investments</a></li>
-								<li><a href=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;Tax Advisory Service</a></li>
-							</ul>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-12 part3">
-							<h5>Twitter Feeds</h5>
-							<div class="twitter"></div>
-						</div>
-						<div class="col-lg-3 col-md-2 col-sm-12 part4">
-							<h5>Flickr Widget</h5>
-							<div class="gallery">
-								<img src="images/f-1.jpg" alt="image">
-								<img src="images/f-2.jpg" alt="image">
-								<img src="images/f-3.jpg" alt="image">
-								<img src="images/f-4.jpg" alt="image">
-								<img src="images/f-5.jpg" alt="image">
-								<img src="images/f-6.jpg" alt="image">
-							</div>
-						</div>
-					</div> <!-- End row -->
-				</div>
-			</div> <!-- End top_footer -->
 			<div class="bottom_footer container-fluid">
 				<div class="container">
-					<p class="float_left">Copyright &copy; MeFinance 2015. All rights reserved. </p>
+					<p class="float_left">Copyright &copy; Elion SPB 2017. All rights reserved. </p>
 					<p class="float_right">Created by: DesignArc</p>
 				</div>
 			</div> <!-- End bottom_footer -->
@@ -290,5 +196,7 @@
 
     {% block add_js %}{% endblock %}
 
+    <!-- Custom & Vendor js -->
+    <script type="text/javascript" src="{% static 'vendors/js/custom.js' %}"></script>
 </body>
 </html>
