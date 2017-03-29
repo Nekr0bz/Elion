@@ -1,9 +1,42 @@
 {% extends "main/main.html" %}
 {% load staticfiles %}
+{% load thumbnail %}
 
 {% block title %}Новости{% endblock %}
 {% block body_class %}faqs{% endblock %}
 
 {% block content %}
+<!-- ======= Banner ======= -->
+{% include 'generic/banner.html' with name_section="Новости" %}
+<!-- ================= /Banner ================ -->
 
+<!-- =============== blog container ============== -->
+<article class="blog-variation-container blog_three">
+    <div class="container">
+        <div class="row">
+            {% for object in latest %}
+             <div class="col-lg-6 col-md-6 blog_single_post"
+             style="height: 513px">
+                <div class="img_holder">
+                    <img class="img-responsive" src="{% thumbnail object.img "list" %}" alt="image">
+                    <div class="img_overlay"><a href="{{ object.get_absolute_url }}"><i class="fa fa-link"></i></a></div>
+                    <p><span>{{ object.datetime|date:"d" }}</span>{{object.datetime|date:"E"}}</p>
+                </div>
+                <h3>{{ object.title }}</h3>
+                <p>{{ object.description}}</p>
+                <a href="{{ object.get_absolute_url }}">подробнее<i class="fa fa-arrow-circle-right"> </i></a>
+            </div>
+            {% endfor %}
+
+
+
+        </div> <!-- End row -->
+    </div> <!-- End container -->
+</article>
+<!-- =============== /blog container ============== -->
+
+{% endblock %}
+
+{% block add_js %}
+    <script type="text/javascript" src="{% static 'vendors/js/jquery.mixitup.min.js' %}"></script>
 {% endblock %}
