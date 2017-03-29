@@ -6,6 +6,7 @@ from easy_thumbnails.files import get_thumbnailer
 from .models import Service
 from Elion.settings import THUMBNAIL_ALIASES as th_options
 
+
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['title', 'content']
     readonly_fields = ('image_thumb',)
