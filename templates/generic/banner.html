@@ -4,11 +4,11 @@ style="background:url({% static 'vendors/img/banner-bg.jpg' %}) no-repeat center
     <div class="about_banner_opacity">
         <div class="container">
             <div class="banner_info_about">
-                <h1>{{ name_section }}</h1>
+                <h1>{{ this_section }}</h1>
                 <ul>
-                    <li><a href="{% url 'main' %}">Главная</a></li>
+                    <li><a href="{{ prev_selection_url|default:'/'}}">{{ prev_selection|default:"Главная" }}</a></li>
                     <li><i class="fa fa-angle-right"></i></li>
-                    <li>{{ name_section }}</li>
+                    <li>{{ this_section }}</li>
                 </ul>
             </div> <!-- End Banner Info -->
         </div> <!-- End Container -->

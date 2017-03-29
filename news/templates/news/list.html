@@ -7,7 +7,7 @@
 
 {% block content %}
 <!-- ======= Banner ======= -->
-{% include 'generic/banner.html' with name_section="Новости" %}
+{% include 'generic/banner.html' with this_section="Новости"%}
 <!-- ================= /Banner ================ -->
 
 <!-- =============== blog container ============== -->
@@ -50,7 +50,7 @@
                 </ul>
             </div>
             {% endif %}
-            <!-- End pagination -->
+            <!-- End pagination --><!--TODO: ограничение кол-ва страниц пагинации-->
 
         </div> <!-- End row -->
     </div> <!-- End container -->

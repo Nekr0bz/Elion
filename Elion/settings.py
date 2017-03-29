@@ -133,7 +133,8 @@ THUMBNAIL_ALIASES = {
     },
     "news.News.img": {
         "adm": {"size": (150, 150)},
-        "list": {"size": (548, 260)}
+        "list": {"size": (548, 260)},
+        "detail": {"size": (1148, 360)}
     }
 }
 

@@ -1,7 +1,46 @@
-<p>{{ object.usr.email }}</p>
-<p>{{ object.datetime }}</p>
-<h2>{{ object.title }}</h2>
-<h4>{{ object.description }}</h4>
-{% autoescape off %}
-    <p>{{ object.content }}</p>
-{% endautoescape %}
+{% extends "main/main.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block title %}{{ object.title }}{% endblock %}
+{% block body_class %}faqs{% endblock %}
+
+{% block content %}
+<!-- ======= Banner ======= -->
+{% include 'generic/banner.html' with this_section=object.title prev_selection='Новости' prev_selection_url='/news' %}
+<!-- ================= /Banner ================ -->
+
+<!-- ================== Blog Container ========== -->
+		<section class="blog-container two-side-background single-blog-page faqs_sec"> <!-- faqs_sec use for style right side content -->
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 blog_single_post blog_single_post_v4 blog_single_post_v4_v4 ptb-80">
+						<!-- .single-blog-post -->
+						<div class="single-blog-post single-page-content anim-5-all">
+							<!-- .img-holder -->
+							<div class="img-holder">
+								<img src="{% thumbnail object.img "detail" %}" alt="">
+							</div><!-- /.img-holder -->
+							<div class="post-meta">
+								<div class="date-holder">
+									<span>{{ object.datetime|date:"d" }}</span>{{object.datetime|date:"E"}}
+								</div>
+								<div class="title-holder">
+									<h2 class="title">{{ object.title }}</h2>
+								</div>
+							</div>
+							<div class="content">
+								<p>{% autoescape off %}{{ object.content }}{% endautoescape %}</p>
+                            </div>
+						</div><!-- /.single-blog-post -->
+					</div>
+				</div>
+			</div>
+		</section>
+<!-- ================== /Blog Container ========== -->
+
+{% endblock %}
+
+{% block add_js %}
+    <script type="text/javascript" src="{% static 'vendors/js/jquery.mixitup.min.js' %}"></script>
+{% endblock %}
