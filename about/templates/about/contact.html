@@ -7,22 +7,9 @@
 
 {% block content %}
 <!-- ======= Banner ======= -->
-    <section class="p0 container-fluid banner about_banner"
-    style="background:url({% static 'vendors/img/banner-bg.jpg' %}) no-repeat center">
-        <div class="about_banner_opacity">
-            <div class="container">
-                <div class="banner_info_about">
-                    <h1>Контакты</h1>
-                    <ul>
-                        <li><a href="{% url 'main' %}">Главная</a></li>
-                        <li><i class="fa fa-angle-right"></i></li>
-                        <li>Контакты</li>
-                    </ul>
-                </div> <!-- End Banner Info -->
-            </div> <!-- End Container -->
-        </div> <!-- End Banner_opacity -->
-    </section> <!-- End Banner -->
+{% include 'generic/banner.html' with name_section="Контакты" %}
 <!-- ================= /Banner ================ -->
+
 <!-- =================== Contact us container ============== -->
     <section class="contact_us_container">
         <div class="container">
