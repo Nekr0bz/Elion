@@ -1,0 +1,25 @@
+{% extends "main/main.html" %}
+{% load thumbnail %}
+{% block title %}Услуги{% endblock %}
+{% block body_class %}"service"{% endblock %}
+{% block content %}
+<!-- ======= Banner ======= -->
+{% include 'generic/banner.html' with this_section="Услуги"%}
+<!-- ================= /Banner ================ -->
+
+<!-- ======== Service facts ========= -->
+		<section class="service_facts">
+			<div class="container">
+				<div class="row">
+                    {% for object in object_list %}
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<img class="img-responsive" src="{% thumbnail object.img 'srvc_list' %}" alt="images">
+						<a href=""><h3>{{ object.title }}</h3></a>
+						<p>{{ object.content }}</p>
+					</div>
+                    {% endfor %}
+				</div>
+			</div>
+		</section>
+<!-- ======== /Service facts ========= -->
+{% endblock %}

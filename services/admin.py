@@ -18,7 +18,7 @@ class ServiceAdmin(admin.ModelAdmin):
 
     def image_thumb(self, obj):
         th = get_thumbnailer(obj.img)
-        th = th.get_thumbnail(th_options["services.Service.img"]["srvc"])
+        th = th.get_thumbnail(th_options["services.Service.img"]["srvc_adm"])
         ret = '<a href="'+str(obj.img.url)+'"><img src=/media/'+str(th)+'/></a>'
         return mark_safe(ret)
     image_thumb.short_description = 'Миниатюра изображения'

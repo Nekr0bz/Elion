@@ -129,12 +129,13 @@ THUMBNAIL_BASEDIR = "thumbnails"
 THUMBNAIL_DEFAULT_OPTIONS = {"crop": "smart"}
 THUMBNAIL_ALIASES = {
     "services.Service.img": {
-        "srvc": {"size": (150, 150)}
+        "srvc_adm": {"size": (150, 150)},
+        "srvc_list": {"size": (354, 204)}
     },
     "news.News.img": {
-        "adm": {"size": (150, 150)},
-        "list": {"size": (548, 260)},
-        "detail": {"size": (1148, 360)}
+        "news_adm": {"size": (150, 150)},
+        "news_list": {"size": (548, 260)},
+        "news_detail": {"size": (1148, 360)}
     }
 }
 
