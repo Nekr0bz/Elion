@@ -8,20 +8,32 @@ from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content']
-    readonly_fields = ('image_thumb',)
+    list_display = ['title', 'slug', 'description']
+    prepopulated_fields = {"slug": ("title",)}
+    readonly_fields = ('thumb_main_img', 'thumb_prev_img')
     fieldsets = [
         (None,                  {'fields': ['title']}),
+        (None,                  {'fields': ['slug']}),
+        (None,                  {'fields': ['description']}),
         (None,                  {'fields': ['content']}),
-        ('Изображение',         {'fields': [('image_thumb', 'img')]})
+        ('Изображения',         {'fields': [('thumb_main_img', 'main_img'),
+                                            ('thumb_prev_img', 'prev_img')]})
     ]
 
-    def image_thumb(self, obj):
-        th = get_thumbnailer(obj.img)
-        th = th.get_thumbnail(th_options["services.Service.img"]["srvc_adm"])
-        ret = '<a href="'+str(obj.img.url)+'"><img src=/media/'+str(th)+'/></a>'
+    # TODO: Упростить!!!
+    def thumb_main_img(self, obj):
+        th = get_thumbnailer(obj.main_img)
+        th = th.get_thumbnail(th_options["services.Service"]["srvc_adm"])
+        ret = '<a href="'+str(obj.main_img.url)+'"><img src=/media/'+str(th)+'/></a>'
         return mark_safe(ret)
-    image_thumb.short_description = 'Миниатюра изображения'
+    thumb_main_img.short_description = 'Миниатюра изображения для превью'
+
+    def thumb_prev_img(self, obj):
+        th = get_thumbnailer(obj.prev_img)
+        th = th.get_thumbnail(th_options["services.Service"]["srvc_adm"])
+        ret = '<a href="'+str(obj.prev_img.url)+'"><img src=/media/'+str(th)+'/></a>'
+        return mark_safe(ret)
+    thumb_prev_img.short_description = 'Миниатюра изображения для превью'
 
 
 admin.site.register(Service, ServiceAdmin)

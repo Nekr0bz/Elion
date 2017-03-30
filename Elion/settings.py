@@ -128,9 +128,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 THUMBNAIL_BASEDIR = "thumbnails"
 THUMBNAIL_DEFAULT_OPTIONS = {"crop": "smart"}
 THUMBNAIL_ALIASES = {
-    "services.Service.img": {
+    "services.Service": {
         "srvc_adm": {"size": (150, 150)},
-        "srvc_list": {"size": (354, 204)}
+        "srvc_list": {"size": (354, 204)},
+        "srvc_detail": {"size": (730, 305)}
     },
     "news.News.img": {
         "news_adm": {"size": (150, 150)},

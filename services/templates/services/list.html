@@ -13,9 +13,9 @@
 				<div class="row">
                     {% for object in object_list %}
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-						<img class="img-responsive" src="{% thumbnail object.img 'srvc_list' %}" alt="images">
-						<a href=""><h3>{{ object.title }}</h3></a>
-						<p>{{ object.content }}</p>
+						<img class="img-responsive" src="{% thumbnail object.main_img 'srvc_list' %}" alt="images">
+						<a href="{{ object.get_absolute_url }}"><h3>{{ object.title }}</h3></a>
+						<p>{{ object.description }}</p>
 					</div>
                     {% endfor %}
 				</div>

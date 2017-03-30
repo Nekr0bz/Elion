@@ -2,5 +2,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.ServicesListViews.as_view(), name="list")
+    url(r'^$', views.ServicesListViews.as_view(), name="list"),
+    url(r'^(?P<slug>[-\w]+)/$', views.ServiceDetailViews.as_view(), name="detail"),
 ]
