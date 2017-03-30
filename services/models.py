@@ -1,22 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.db.models.signals import pre_delete, pre_save
-from django.dispatch import receiver
 from django.core.urlresolvers import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
-from easy_thumbnails.files import get_thumbnailer
-
-# TODO: вынести
-def dir_slug_path(instance, filename):
-    # Модель должна иметь поле 'slug' и 'DIR_PATH_PREFIX'
-    return instance.DIR_PATH_PREFIX+instance.slug+'/'+filename
+from generic.shortcuts import dir_slug_path
+from generic.signals import del_imgs__pre_delete, del_imgs__pre_save
 
 
 class Service(models.Model):
-    DIR_PATH_PREFIX = 'services/'
-    # tuple_images = (main_img, prev_img)
-
-    # Fields:
     title = models.CharField(max_length=50, unique=True, verbose_name='Заголовок')
     slug = models.SlugField(unique=True)
     description = models.CharField(max_length=100, verbose_name='Краткое описание')
@@ -24,7 +15,7 @@ class Service(models.Model):
     prev_img = models.ImageField(upload_to=dir_slug_path, verbose_name='Изображение для превью', help_text='354х204px')
     content = RichTextUploadingField(verbose_name='Основное описание')
 
-
+    DIR_PATH_PREFIX = 'services/'
 
     class Meta:
         verbose_name = 'Услуга'
@@ -34,31 +25,16 @@ class Service(models.Model):
     def get_absolute_url(self):
         return reverse('services:detail', kwargs={'slug': self.slug})
 
+    def get_images_fields(self):
+        return self.main_img, self.prev_img
+
     def __unicode__(self):
         return self.title
 
-
-# TODO: вынести и упростить
-@receiver(pre_delete, sender=Service)
-def del_img_pre_del_service(sender, instance, **kwargs):
-    # TODO: удалить директорию
-    get_thumbnailer(instance.main_img).delete_thumbnails()
-    instance.main_img.delete(save=False)
-    get_thumbnailer(instance.prev_img).delete_thumbnails()
-    instance.prev_img.delete(save=False)
+# Регистрация callback-функций сигналов
+pre_delete.connect(del_imgs__pre_delete, sender=Service)
+pre_save.connect(del_imgs__pre_save, sender=Service)
 
 
-@receiver(pre_save, sender=Service)
-def del_img_pre_save_service(sender, instance, **kwargs):
-    try:
-        this_service = Service.objects.get(id=instance.id)
-        if this_service.main_img != instance.main_img:
-            get_thumbnailer(this_service.main_img).delete_thumbnails()
-            this_service.main_img.delete(save=False)
 
-        if this_service.prev_img != instance.prev_img:
-            get_thumbnailer(this_service.prev_img).delete_thumbnails()
-            this_service.prev_img.delete(save=False)
 
-    except Service.DoesNotExist:
-        pass

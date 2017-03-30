@@ -54,7 +54,7 @@ ROOT_URLCONF = 'Elion.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'generic/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +133,7 @@ THUMBNAIL_ALIASES = {
         "srvc_list": {"size": (354, 204)},
         "srvc_detail": {"size": (730, 305)}
     },
-    "news.News.img": {
+    "news.News": {
         "news_adm": {"size": (150, 150)},
         "news_list": {"size": (548, 260)},
         "news_detail": {"size": (1148, 360)}

@@ -20,7 +20,7 @@ class ServiceAdmin(admin.ModelAdmin):
                                             ('thumb_prev_img', 'prev_img')]})
     ]
 
-    # TODO: Упростить!!!
+    # TODO: Упростить!
     def thumb_main_img(self, obj):
         th = get_thumbnailer(obj.main_img)
         th = th.get_thumbnail(th_options["services.Service"]["srvc_adm"])
