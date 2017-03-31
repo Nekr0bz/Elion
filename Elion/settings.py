@@ -130,8 +130,7 @@ THUMBNAIL_DEFAULT_OPTIONS = {"crop": "smart"}
 THUMBNAIL_ALIASES = {
     "services.Service": {
         "srvc_adm": {"size": (150, 150)},
-        "srvc_list": {"size": (354, 204)},
-        "srvc_detail": {"size": (730, 305)}
+        "srvc_main": {"size": (730, 305)}
     },
     "news.News": {
         "news_adm": {"size": (150, 150)},

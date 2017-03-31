@@ -15,6 +15,7 @@
 
     <!-- Bootstrap -->
     <link href="{% static 'vendors/css/bootstrap/bootstrap.css' %}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'vendors/css/bootstrap.vertical-tabs.css' %}">
 
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500italic,500,700,700italic' rel='stylesheet' type='text/css'>
@@ -110,7 +111,7 @@
 					<div class="nav_main_list custom-scroll-bar pull-left" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav" id="hover_slip">
 							<li><a href="{% url 'main' %}">Главная</a></li>
-							<li><a href="{% url 'services:list' %}">Услуги</a></li>
+							<li><a href="{% url 'services' %}">Услуги</a></li>
                             <li><a href="{% url 'main' %}">О компании</a></li>
                             <li><a href="{% url 'news:list' %}">Новости</a></li>
 							<li><a href="{% url 'guestbook:index' %}">Отзывы</a></li>

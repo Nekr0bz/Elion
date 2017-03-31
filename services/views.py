@@ -3,9 +3,7 @@ from django.views.generic import ListView
 from services.models import Service
 
 
-class ServicesListViews(ListView):
+class ServicesMainViews(ListView):
     model = Service
-    template_name = 'services/list.html'
+    #template_name = 'services/main.html'
 
-class ServiceDetailViews(ListView):
-    pass
