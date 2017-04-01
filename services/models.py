@@ -2,6 +2,7 @@
 from django.db import models
 from django.db.models.signals import pre_delete, pre_save
 from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 from generic.signals import del_imgs__pre_delete, del_imgs__pre_save
 
 
@@ -9,8 +10,6 @@ class Service(models.Model):
     title = models.CharField(max_length=50, unique=True, verbose_name='Заголовок')
     main_img = models.ImageField(upload_to='services/', verbose_name='Основное изображение', help_text='730х305px')
     content = RichTextUploadingField(verbose_name='Основное описание')
-
-    DIR_PATH_PREFIX = 'services/'
 
     class Meta:
         verbose_name = 'Услуга'
@@ -23,9 +22,40 @@ class Service(models.Model):
     def __unicode__(self):
         return self.title
 
+
+class ServiceSections(models.Model):
+    SUB_SERVICE = (1, 'Дополнительная услуга')
+    EXT_DESCRIPTION = (2, 'Дополнительное описание')
+    TYPE_CHOICES = (SUB_SERVICE, EXT_DESCRIPTION)
+
+    parent_service = models.ForeignKey(Service)
+    title = models.CharField(max_length=50, unique=True, verbose_name='Заголовок')
+    content = RichTextField(verbose_name='Описание')
+    type = models.IntegerField(choices=TYPE_CHOICES, verbose_name='Тип раздела', default=SUB_SERVICE)
+    img = models.ImageField(upload_to='services/sections/', verbose_name='Изображение',
+                            help_text='Доп. услуга: 248х199px.\nДоп. описание: 151х161px.')
+
+    class Meta:
+        verbose_name = 'Дополнительный раздел'
+        verbose_name_plural = 'Дополнительные разделы'
+        db_table = 'Service_Sections'
+        ordering = ['type']
+
+    def get_images_fields(self):
+        return self.img,
+
+    def __unicode__(self):
+        return self.title
+
+
 # Регистрация callback-функций сигналов
+# TODO: мб упростить?
 pre_delete.connect(del_imgs__pre_delete, sender=Service)
 pre_save.connect(del_imgs__pre_save, sender=Service)
+pre_delete.connect(del_imgs__pre_delete, sender=ServiceSections)
+pre_save.connect(del_imgs__pre_save, sender=ServiceSections)
+
+
 
 
 

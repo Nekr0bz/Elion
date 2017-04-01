@@ -132,6 +132,9 @@ THUMBNAIL_ALIASES = {
         "srvc_adm": {"size": (150, 150)},
         "srvc_main": {"size": (730, 305)}
     },
+    "services.ServiceSections": {
+        "section_adm": {"size": (150, 150)}
+    },
     "news.News": {
         "news_adm": {"size": (150, 150)},
         "news_list": {"size": (548, 260)},
