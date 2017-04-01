@@ -1,0 +1,61 @@
+{% extends "main/main.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block title %}Услуги{% endblock %}
+
+{% block add_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/css/bootstrap.vertical-tabs.css' %}">
+{% endblock %}
+
+{% block body_class %}service2{% endblock %}
+
+
+{% block content %}
+<!-- ======= Banner ======= -->
+{% include 'generic/banner.html' with this_section="Услуги"%}
+<!-- ================= /Banner ================ -->
+
+<section class="side_tab">
+    <div class="container">
+        <div class="row">
+            <div class="white_bg right_side col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
+                <div class="tab_details">
+                    <!-- Tab panes -->
+                    <div class="tab-content right_info">
+                    {% for object in object_list  %}
+                        <div
+                        {% if forloop.first %}
+                            class="tab-pane fade in row active" id="{{ object.id }}">
+                        {% else %}
+                            class="tab-pane fade row" id="{{ object.id }}">
+                        {% endif %}
+                            <img class="img-responsive" src="{% thumbnail object.main_img 'srvc_main' %}" alt="image">
+                            <h2>{{ object.title }}</h2>
+                            {% autoescape off %}<p>{{ object.content }}</p>{% endautoescape %}
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div> <!-- End tab_details -->
+
+            </div> <!-- End white_bg -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left left_side_bar"> <!-- required for floating -->
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
+                {% for object in object_list  %}
+                    <li{% if forloop.first %} class="active"{% endif %}>
+                        <a href="#{{ object.id }}" data-toggle="tab"><i class="fa fa-angle-right"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ object.title }}</a>
+                    </li>
+                {% endfor %}
+              </ul>
+              <div class="advisor_side"> <!-- Advisor profile & Download option -->
+                <h3>Company Brochure </h3>
+                <a href=""><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;&nbsp;Download Brochure PDF</a>
+                <a href=""><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;&nbsp;Download Brochure Doc File</a>
+              </div> <!-- End Advisor profilr & Download option-->
+            </div>
+        </div> <!-- End row -->
+    </div> <!-- End container -->
+</section>
+
+{% endblock %}
