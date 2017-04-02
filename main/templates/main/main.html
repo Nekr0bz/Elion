@@ -38,62 +38,59 @@
 </head>
 <body class={% block body_class %}{% endblock %}>
 <!-- =======Header ======= -->
-		<header>
-			<!--div class="container-fluid top_header">
-				<div class="container">
-					<p class="float_left">Welcome to Me Financial Services, we have over 12 years of expertise</p>
-					<div class="float_right">
-						<ul>
-							<li><a href=""><i class="fa fa-facebook"></i></a></li>
-							<li><a href=""><i class="fa fa-twitter"></i></a></li>
-							<li><a href=""><i class="fa fa-google-plus"></i></a></li>
-							<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-							<li>
-								<div  id="search_box">
-									<input id="search" type="text" placeholder="Search here">
-									<button id="button" type="submit"><span class="icon icon-Search"></span></button>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div> <!-- end container >
-			</div><!-- end top_header -->
-			<div class="bottom_header top-bar-gradient">
-				<div class="container clear_fix">
-					<div class="float_left logo">
-						<a href="{% url 'main' %}">
-							<img src="{% static 'main/img/logo.png' %}" alt="Элоион СПБ" >
-						</a>
-					</div>
-					<div class="float_right address">
-						<div class="top-info">
-							<div class="icon-box">
-								<span class=" icon icon-Pointer"></span>
-							</div>
-							<div class="content-box">
-								<p> 195252, г. Санкт-Петербург<br><span>ул. Карпинского, 20 лит.а, пом. 4-н</span></p>
-							</div>
-						</div>
-						<div class="top-info">
-							<div class="icon-box">
-								<span class="separator icon icon-Phone2"></span>
-							</div>
-							<div class="content-box">
-								<p>+7 (000) 000 00 00 <br><span>info@test.com</span></p>
-							</div>
-						</div>
-						<div class="top-info">
-							<div class="icon-box">
-								<span class="separator icon icon-Timer"></span>
-							</div>
-							<div class="content-box">
-								<p>пн - вс 9.00 - 21.00 <br><span>Без обеда и выходных</span></p>
-							</div>
-						</div>
-					</div>
-				</div> <!-- end container -->
-			</div> <!-- end bottom_header -->
-		</header> <!-- end header -->
+<header>
+    <div class="container-fluid top_header">
+        <div class="container">
+            <p class="float_left">Рады приветствовать вас в Элион СПБ, у нас более 10 лет опыта работы.</p>
+            <div class="float_right">
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><a href="">{{ user.get_full_name }}</a></li>
+                        <li><a href="{% url 'accounts:logout' %}">Выйти</a></li>
+                    {% else %}
+                        <li><a href="{% url 'accounts:login' %}">Войти</a></li>
+                        <li><a href="">Регистрация</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div> <!-- end container -->
+    </div><!-- end top_header -->
+    <div class="bottom_header top-bar-gradient">
+        <div class="container clear_fix">
+            <div class="float_left logo">
+                <a href="{% url 'main' %}">
+                    <img src="{% static 'main/img/logo.png' %}" alt="Элоион СПБ" >
+                </a>
+            </div>
+            <div class="float_right address">
+                <div class="top-info">
+                    <div class="icon-box">
+                        <span class=" icon icon-Pointer"></span>
+                    </div>
+                    <div class="content-box">
+                        <p> 195252, г. Санкт-Петербург<br><span>ул. Карпинского, 20 лит.а, пом. 4-н</span></p>
+                    </div>
+                </div>
+                <div class="top-info">
+                    <div class="icon-box">
+                        <span class="separator icon icon-Phone2"></span>
+                    </div>
+                    <div class="content-box">
+                        <p>+7 (000) 000 00 00 <br><span>info@test.com</span></p>
+                    </div>
+                </div>
+                <div class="top-info">
+                    <div class="icon-box">
+                        <span class="separator icon icon-Timer"></span>
+                    </div>
+                    <div class="content-box">
+                        <p>пн - вс 9.00 - 21.00 <br><span>Без обеда и выходных</span></p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end container -->
+    </div> <!-- end bottom_header -->
+</header> <!-- end header -->
 <!-- ======= /Header ======= -->
 
 <!-- ======= mainmenu-area section ======= -->

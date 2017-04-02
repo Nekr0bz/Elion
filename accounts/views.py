@@ -26,9 +26,9 @@ class LogoutView(RedirectView):
         url = self.request.META.get('HTTP_REFERER', '/')
         return url
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated():
             logout(request)
-        return super(LogoutView, self).post(request, *args, **kwargs)
+        return super(LogoutView, self).get(request, *args, **kwargs)
 
 
