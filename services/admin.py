@@ -9,10 +9,9 @@ from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 class SectionsInline(admin.StackedInline):
     model = ServiceSections
-    extra = 2
+    extra = 0
     readonly_fields = ('thumb_img',)
     fields = ('type', 'title', 'content', ('thumb_img', 'img'))
-
 
     def thumb_img(self, obj):
         th = get_thumbnailer(obj.img)

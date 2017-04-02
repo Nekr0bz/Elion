@@ -1,6 +1,7 @@
 {% extends "main/main.html" %}
 {% load staticfiles %}
 {% load thumbnail %}
+{% load object_filter %}
 
 {% block title %}Услуги{% endblock %}
 
@@ -33,52 +34,37 @@
                             <img class="img-responsive" src="{% thumbnail object.main_img 'srvc_main' %}" alt="image">
                             <h2>{{ object.title }}</h2>
                             {% autoescape off %}<p>{{ object.content }}</p>{% endautoescape %}
+                            {% for section in object.servicesections_set|filter_type:"1" %}
+                                <div class="market_strategy">
+                                    <div class="market_title_holder {% cycle 'float_left' 'float_right' %}" style="min-height: 199px; padding: 0">
+                                        <h3>{{ section.title }}</h3>
+                                        {% autoescape off %}<p>{{ section.content }}</p>{% endautoescape %}
+                                    </div>
+                                    <img class="img-responsive {% cycle 'float_right' 'float_left' %}" style="padding: 0" src="{% thumbnail section.img 'section_srvc' %}" alt="">
+                                </div>
+                            {% endfor %}
+                            {% if object.servicesections_set|filter_type:"2" %}
+                            <div class="clear_fix"></div>
+                            <div class="bottom_tab" style="padding: 0">
+                                <ul class="nav nav-tabs">
+                                {% for section in object.servicesections_set|filter_type:"2" %}
+                                        <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" href="#s{{section.id}}">{{ section.title }}</a></li>
+                                {% endfor %}
+                                </ul>
+                                <div class="tab-content bottom_tab_info" style="min-height: 220px">
+                                {% for section in object.servicesections_set|filter_type:"2" %}
+                                    <div id="s{{section.id}}" class="tab-pane fade {% if forloop.first %} in active {% endif %}">
+                                        <img class="img-responsive" src="{% thumbnail section.img 'section_desc' %}" alt="">
+                                        {% autoescape off %}<p>{{ section.content }}</p>{% endautoescape %}
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                     {% endfor %}
                     </div>
                 </div> <!-- End tab_details -->
-                <!-- !!!!!!!!!!!!!!!!!!-->
-                <div class="market_strategy">
-                    <div class="market_title_holder float_left">
-                        <h3>СТРАТЕГИИИИЯЯЯ</h3>
-                        <p>LФЫВФЫВФЫВФЫВФЫВФЫВФЫВФЫВФЫАЫВАЫВАЫВАЫФВelit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br>
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                    </div>
-                    <img class="img-responsive float_right" src="images/service/12.jpg" alt="">
-                </div>
-                <div class="market_strategy">
-                    <div class="market_title_holder float_right">
-                        <h3>Market Strategy</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br>
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                    </div>
-                    <img class="img-responsive float_left" src="images/service/12.jpg" alt="">
-                </div>
-                <div class="clear_fix"></div>
-                <div class="bottom_tab">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a data-toggle="tab" href="#tab_1">Benefits</a></li>
-                      <li><a data-toggle="tab" href="#tab_2">Mutual Funds</a></li>
-                      <li><a data-toggle="tab" href="#tab_3">Company Growth</a></li>
-                    </ul>
-                    <div class="tab-content bottom_tab_info">
-                      <div id="tab_1" class="tab-pane fade in active">
-                        <img class="img-responsive" src="images/service/13.jpg" alt="">
-                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                      </div>
-                      <div id="tab_2" class="tab-pane fade">
-                        <img class="img-responsive" src="images/service/13.jpg" alt="">
-                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                      </div>
-                      <div id="tab_3" class="tab-pane fade">
-                        <img class="img-responsive" src="images/service/13.jpg" alt="">
-                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                      </div>
-                    </div>
-                </div> <!-- /!!!!!!!!!!!!!!!!!!-->
             </div> <!-- End white_bg -->
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left left_side_bar"> <!-- required for floating -->
               <!-- Nav tabs -->
@@ -90,9 +76,9 @@
                 {% endfor %}
               </ul>
               <div class="advisor_side"> <!-- Advisor profile & Download option -->
-                <h3>Company Brochure </h3>
-                <a href=""><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;&nbsp;Download Brochure PDF</a>
-                <a href=""><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;&nbsp;Download Brochure Doc File</a>
+                <h3>Брошюра наших предложений</h3>
+                <a href=""><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;&nbsp;Скачать Брошюру PDF</a>
+                <a href=""><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;&nbsp;Скачать Брошюру Doc</a>
               </div> <!-- End Advisor profilr & Download option-->
             </div>
         </div> <!-- End row -->
