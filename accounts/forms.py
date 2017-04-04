@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth import forms as auth_forms
 from django.utils.translation import ugettext_lazy as _
 
 from .models import User
@@ -42,7 +42,7 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password = ReadOnlyPasswordHashField(
+    password = auth_forms.ReadOnlyPasswordHashField(
         label=_("Password"),
         help_text=_(
             "Raw passwords are not stored, so there is no way to see this "
@@ -63,3 +63,22 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
+
+
+class AuthenticationForm(auth_forms.AuthenticationForm):
+    username = auth_forms.UsernameField(
+        max_length=254,
+        widget=forms.TextInput(attrs={
+            'autofocus': '',
+            'placeholder': 'Ваш Email',
+            'class': 'form-control email'
+        }),
+    )
+    password = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Ваш пароль',
+            'class': 'form-control'
+        }),
+    )

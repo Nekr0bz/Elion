@@ -1,11 +1,14 @@
-from django.contrib.admin.forms import AdminAuthenticationForm
+# -*- coding: utf-8 -*-
+from django.contrib import messages
 from django.views.generic.edit import FormView
 from django.views.generic.base import RedirectView
 from django.contrib.auth import logout
+from .forms import AuthenticationForm
+from django.contrib.auth.views import login
 
 
 class LoginView(FormView):
-    form_class = AdminAuthenticationForm
+    form_class = AuthenticationForm
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
@@ -19,6 +22,10 @@ class LoginView(FormView):
         context = super(LoginView, self).get_context_data(**kwargs)
         context["next"] = self.get_success_url()
         return context
+
+    def form_valid(self, form):
+        login(self.request, authentication_form=AuthenticationForm)
+        return super(LoginView, self).form_valid(form)
 
 
 class LogoutView(RedirectView):
