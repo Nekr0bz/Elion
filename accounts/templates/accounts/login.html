@@ -11,14 +11,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;"> <!-- section title -->
                 <h2>Аутентификация</h2>
-                {% if messages %}
-                    {% for message in messages %}
-                      <p>{{ message }}</p>
-                    {% endfor %}
-                {% else %}
-                    <!--TODO: LiveChat-->
-                <p>Заполните все поля формы ниже.</p>
-                {% endif %}
+                {% include 'generic/messages.html' with default_text="Заполните все поля формы ниже." %}
             </div> <!-- End section title -->
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 form_holder" style="padding-bottom: 50px; margin-left: 20%"> <!-- form holder -->
                 <form action="{% url 'accounts:login' %}?next={{ next }}" class="contact-form" method="post">

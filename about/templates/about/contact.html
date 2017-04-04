@@ -15,15 +15,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;"> <!-- section title -->
-                    <h2>Свяжитесь с нами</h2>
-                    {% if messages %}
-                        {% for message in messages %}
-                          <p>{{ message }}</p>
-                        {% endfor %}
-                    {% else %}
-                        <!--TODO: LiveChat-->
-                    <p>Вы можете в любое время написать нам. Для этого, заполните все поля формы ниже.</p>
-                    {% endif %}
+                    <h2>Свяжитесь с нами</h2><!--TODO: LiveChat-->
+                    {% include 'generic/messages.html' with default_text="Вы можете в любое время написать нам. Для этого, заполните все поля формы ниже." %}
                 </div> <!-- End section title -->
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 form_holder"> <!-- form holder -->
                     <form action="{% url 'contacts' %}" class="contact-form" method="post">

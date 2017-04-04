@@ -1,0 +1,7 @@
+{% if messages %}
+     {% for message in messages %}
+       <p>{{ message }}</p>
+     {% endfor %}
+ {% else %}
+ <p>{{ default_text }}</p>
+ {% endif %}
