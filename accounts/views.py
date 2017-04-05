@@ -9,7 +9,7 @@ from django.contrib.auth.views import login
 
 class LoginView(FormView):
     form_class = AuthenticationForm
-    template_name = 'accounts/login.html'
+    template_name = 'accounts/sign_in.html'
 
     def get_success_url(self):
         try:
