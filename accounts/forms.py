@@ -65,10 +65,10 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class AuthenticationForm(auth_forms.AuthenticationForm):
+class SignInForm(auth_forms.AuthenticationForm):
     username = auth_forms.UsernameField(
         max_length=254,
-        widget=forms.TextInput(attrs={
+        widget=forms.EmailInput(attrs={
             'autofocus': '',
             'placeholder': 'Ваш Email',
             'class': 'form-control email'
@@ -79,6 +79,33 @@ class AuthenticationForm(auth_forms.AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Ваш пароль',
+            'class': 'form-control'
+        }),
+    )
+
+
+class SignUpForm(UserCreationForm):
+    email = auth_forms.UsernameField(
+        max_length=254,
+        widget=forms.EmailInput(attrs={
+            'autofocus': '',
+            'placeholder': 'Введите Email',
+            'class': 'form-control email'
+        }),
+    )
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Введите пароль',
+            'class': 'form-control'
+        }),
+    )
+    password2 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Повторите пароль',
             'class': 'form-control'
         }),
     )

@@ -49,7 +49,7 @@
                         <li><a href="{% url 'accounts:logout' %}">Выйти</a></li>
                     {% else %}
                         <li><a href="{% url 'accounts:login' %}">Войти</a></li>
-                        <li><a href="">Регистрация</a></li>
+                        <li><a href="{% url 'accounts:register' %}">Регистрация</a></li>
                     {% endif %}
                 </ul>
             </div>
