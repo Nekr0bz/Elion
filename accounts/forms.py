@@ -93,19 +93,31 @@ class SignUpForm(UserCreationForm):
             'class': 'form-control email'
         }),
     )
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Введите имя',
+            'class': 'form-control'
+        }),
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Введите фамлию',
+            'class': 'form-control'
+        }),
+    )
     password1 = forms.CharField(
-        label=_("Password"),
-        strip=False,
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Введите пароль',
             'class': 'form-control'
         }),
     )
     password2 = forms.CharField(
-        label=_("Password"),
-        strip=False,
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Повторите пароль',
             'class': 'form-control'
         }),
     )
+
+    class Meta:
+        model = User
+        fields = ("email", "first_name", "last_name")
