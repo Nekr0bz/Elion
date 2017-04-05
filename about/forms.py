@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.core.mail import send_mail
+
+from Elion import settings
 
 
 class ContactMessageForm(forms.Form):
@@ -20,9 +23,14 @@ class ContactMessageForm(forms.Form):
         'placeholder': 'Сообщение'
     }))
     error_css_class = 'error'
-    def generate_message(self):
+
+    def _generate_message(self):
         subject = self.cleaned_data['subject'].encode('utf-8')
         message = 'Имя: ' + self.cleaned_data['name'].encode('utf-8') + '\n'
         message += 'Email: ' + self.cleaned_data['email'].encode('utf-8') + '\n'
         message += self.cleaned_data['message'].encode('utf-8')
         return subject, message
+
+    def send_email(self):
+        (subject, message) = self._generate_message()
+        send_mail(subject, message, settings.EMAIL_HOST_USER, ['nekr0b@yandex.ru'])

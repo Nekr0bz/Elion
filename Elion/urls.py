@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^services/', services_views.ServicesMainViews.as_view(), name='services'),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
-    url(r'^contacts/$', about_views.ContactView.as_view(template_name='about/contact.html'), name='contacts'),
+    url(r'^contacts/$', about_views.ContactView.as_view(), name='contacts'),
     url(r'^news/', include('news.urls', namespace='news')),
     url(r'^guestbook/', include('guestbook.urls', namespace='guestbook')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

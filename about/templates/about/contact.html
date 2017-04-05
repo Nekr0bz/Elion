@@ -20,11 +20,8 @@
                 </div> <!-- End section title -->
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 form_holder"> <!-- form holder -->
                     <form action="{% url 'contacts' %}" class="contact-form" method="post">
-                        {% csrf_token %}<!--TODO: Автоматическая подсветка ошибок!-->
-                        {{ form.name }}
-                        {{ form.email }}
-                        {{ form.subject }}
-                        {{ form.message }}
+                        <!--TODO: Автоматическая подсветка ошибок!-->
+                        {% include 'generic/forms.html' %}
                         <button type="submit" class="submit">отправить<i class="fa fa-arrow-circle-right"></i></button>
                     </form> <!-- End form holder -->
                 </div>

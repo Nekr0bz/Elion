@@ -15,9 +15,7 @@
             </div> <!-- End section title -->
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 form_holder" style="padding-bottom: 50px; margin-left: 20%"> <!-- form holder -->
                 <form action="{% url 'accounts:login' %}?next={{ next }}" class="contact-form" method="post">
-                    {% csrf_token %}
-                    {{ form.username }}
-                    {{ form.password }}
+                    {% include 'generic/forms.html' %}
                     <button type="submit" class="submit pull-right">Войти<i class="fa fa-arrow-circle-o-up"></i></button>
                     <!--TODO:Востановить пароль-->
                     <button class="submit pull-right" style="background-color: rgb(255, 221, 0); margin-right: 15px">Вспомнить пароль<i class="fa fa-undo"></i></button>
