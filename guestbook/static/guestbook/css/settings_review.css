@@ -1,0 +1,27 @@
+.three_dots{
+    padding-left: 0px;
+    padding-right: 0px;
+    border-width: 0px;
+    background-color: #f7f7f7;
+    font-size: 16px;
+    float: right;
+}
+
+.three_dots:focus{
+    outline-color: #f7f7f7;
+}
+
+.three_dots:hover{
+    color: grey;
+}
+
+.three_dots + ul{
+    position: static;
+    float: right;
+    font-size: 13px;
+    min-width: 130px;
+}
+
+.open > .dropdown-menu {
+    display: flex;
+}

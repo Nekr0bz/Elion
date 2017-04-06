@@ -1,6 +1,11 @@
 {% extends "main/main.html" %}
 {% load staticfiles %}
 {% block title %}Отзывы{% endblock %}
+
+{% block add_css %}
+    <link href="{% static 'guestbook/css/settings_review.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block body_class %}faqs{% endblock %}
 
 {% block content %}
@@ -31,10 +36,20 @@
         {% for object in latest %}
             <br><br>
             <div class="quote-box dt" style="padding-bottom: 15px">
+                <div class="dropdown" >
+                    <button class="three_dots dropdown-toggle" data-toggle="dropdown" style="margin-right: 20px">
+                        <span>&#8942;</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a>Изменить</a></li>
+                        <li><a>Удалить</a></li>
+                    </ul>
+                </div>
                 <div class="quote-content dtc" >
-                    <p style="margin-bottom: 3px; padding-top: 0px">{{ object.text }}</p>
+                    <p style="margin-bottom: 3px; padding-top: 18px">{{ object.text }}</p>
                     <span class="name">- {{ object.usr.get_full_name }}</span>
-                    <span class="name" style="color: #337ab7; margin-top: 5px">{{ object.datetime|date:"F d o" }}</span>
+
+                    <span class="name" style="color: #337ab7; margin-top: 5px"><a href=""><b>Ответить</b></a> | {{ object.datetime|date:"F d o" }}</span>
                 </div>
             </div>
         {% endfor %}
