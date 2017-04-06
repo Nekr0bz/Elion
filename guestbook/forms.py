@@ -8,7 +8,7 @@ class GuestBookForm(forms.ModelForm):
     text = forms.CharField(widget=forms.Textarea(attrs={
         'style': 'width :100%; height: 100px',
         'class': 'form-control',
-        'placeholder': 'Оставьте ваш отзыв'
+        'placeholder': 'Напишите ваш отзыв'
     }))
 
     class Meta:

@@ -9,15 +9,24 @@
 <!-- ================= /Banner ================ -->
 
 <!-- =============== blog container ============== -->
-<section class="contact_us_container" style="padding-top: 40px">
+<section class="contact_us_container" style="padding-top: 0">
     <div class="container">
-        <div class="form_holder" style="padding-right: 0px">
-            <form method="post" action="{% url 'guestbook' %}" class="contact-form">
-                {% csrf_token %}
-                {{ form.text }}
-                <button type="submit" class="submit" style="margin-top: 10px; float: right">Оставить отзыв<i class="fa fa-arrow-circle-right"></i></button>
-            </form>
-        </div>
+        {% if user.is_authenticated %}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center; padding-bottom: 20px"> <!-- section title -->
+                {% include 'generic/messages.html' with default_text="Вы можете поделится своим мнение о работе нашей фирмы.<br>Для этого, заполните все поля формы ниже." %}
+            </div> <!-- End section title -->
+            <div class="form_holder" style="padding-right: 0px">
+                <form method="post" action="{% url 'guestbook' %}" class="contact-form">
+                    {% csrf_token %}
+                    {{ form.text }}
+                    <button type="submit" class="submit" style="margin-top: 10px; float: right">Оставить отзыв<i class="fa fa-arrow-circle-right"></i></button>
+                </form>
+            </div>
+        {% else %}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center; padding-bottom: 20px"> <!-- section title -->
+                <p>Оставлять отзывы могут только зарегистрированные пользователи.</p>
+            </div> <!-- End section title -->
+        {% endif %}
         <br><br>
         {% for object in latest %}
             <br><br>
