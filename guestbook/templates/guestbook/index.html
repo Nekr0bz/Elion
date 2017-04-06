@@ -48,13 +48,25 @@
                     </div>
                 {% endif %}
                 <div class="quote-content dtc" >
-                    <p style="margin-bottom: 3px; padding-top: 18px">{{ object.text }}</p>
+                    <p style="margin-bottom: 3px; padding-top: 18px; font-style: normal">{{ object.text }}</p>
                     <span class="name">- {{ object.usr.get_full_name }}</span>
                     {% if perms.guestbook.change_guestbook %}
                         <span class="name" style="color: #337ab7; margin-top: 5px"><a href=""><b>Ответить</b></a> | {{ object.datetime|date:"F d o" }}</span>
                     {% endif %}
                 </div>
             </div>
+
+            {% if object.guestbook_set.count %}
+            <div class="author-box" style="margin-top: 0">
+                <div class="top-author-info dt">
+                    <div class="top-author-info-content dtc">
+                        <h4>administrator <span>(Michale John)</span></h4>
+                        <p style="color: #fff; font-style: normal; padding-top: 0">Ut enim ad minima veniam, quis nostrum exercitatio nem ullam corporis susc ipit laboriosam, nisi ut aliqu id ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit.</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
         {% endfor %}
         <article class="blog-variation-container" style="padding-top: 0px">
             {% include 'generic/pagination.html' %}
