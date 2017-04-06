@@ -21,9 +21,9 @@
         <br><br>
         {% for object in latest %}
             <br><br>
-            <div class="quote-box dt">
-                <div class="quote-content dtc">
-                    <p style="margin-bottom: 3px;">{{ object.text }}</p>
+            <div class="quote-box dt" style="padding-bottom: 15px">
+                <div class="quote-content dtc" >
+                    <p style="margin-bottom: 3px; padding-top: 0px">{{ object.text }}</p>
                     <span class="name">- {{ object.usr.get_full_name }}</span>
                     <span class="name" style="color: #337ab7; margin-top: 5px">{{ object.datetime|date:"F d o" }}</span>
                 </div>
