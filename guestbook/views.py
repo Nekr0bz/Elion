@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import redirect
 from django.views.generic.dates import ArchiveIndexView
+from django.core.urlresolvers import reverse_lazy
 from .models import GuestBook
 from .forms import GuestBookForm
 
@@ -31,5 +32,6 @@ class GuestBookView(ArchiveIndexView):
             self.form = GuestBookForm(form_data)
             if self.form.is_valid():
                 self.form.save()
+                return redirect(reverse_lazy('guestbook'))
 
         return super(GuestBookView, self).get(request, *args, **kwargs)
