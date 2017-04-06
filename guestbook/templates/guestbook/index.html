@@ -29,33 +29,9 @@
                 </div>
             </div>
         {% endfor %}
-
-            <article class="blog-variation-container" style="padding-top: 0px">
-            <!-- pagination -->
-            {% if paginator.num_pages > 1 %}
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination ">
-                <ul>
-                    {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number}}"><i class="fa fa-long-arrow-left"></i></a></li>
-                    {% endif %}
-
-                    {% for pn in paginator.page_range %}
-                        {% if page_obj.number != pn %}
-                            <li><a href="?page={{ pn }}">{{ pn }}</a></li>
-                        {% else %}
-                            <li><a class="active">{{ pn }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-long-arrow-right"></i></a></li>
-                    {% endif %}
-                </ul>
-            </div>
-            {% endif %}
-            <!-- End pagination --><!--TODO: ограничение кол-ва страниц пагинации-->
-            </article>
-
+        <article class="blog-variation-container" style="padding-top: 0px">
+            {% include 'generic/pagination.html' %}
+        </article>
     </div>
 </section>
 <!-- =============== /blog container ============== -->
