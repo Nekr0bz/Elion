@@ -40,7 +40,10 @@ class GuestBookIndexView(ArchiveIndexView):
 
 
 class GuestBookDeleteView(RedirectView):
-    url = reverse_lazy('guestbook:index')
+
+    def get_redirect_url(self, *args, **kwargs):
+        url = self.request.META.get('HTTP_REFERER', '/')
+        return url
 
     def get(self, request, *args, **kwargs):
         guestbook = get_object_or_404(GuestBook, id=kwargs['guestbook_id'])
