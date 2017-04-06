@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.dates import ArchiveIndexView
+from django.views.generic.base import RedirectView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib import messages
 from .models import GuestBook
 from .forms import GuestBookForm
 
 
-class GuestBookView(ArchiveIndexView):
+class GuestBookIndexView(ArchiveIndexView):
     model = GuestBook
     template_name = 'guestbook/index.html'
     date_field = 'datetime'
@@ -16,10 +18,10 @@ class GuestBookView(ArchiveIndexView):
 
     def get(self, request, *args, **kwargs):
         self.form = GuestBookForm()
-        return super(GuestBookView, self).get(request, *args, **kwargs)
+        return super(GuestBookIndexView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(GuestBookView, self).get_context_data(**kwargs)
+        context = super(GuestBookIndexView, self).get_context_data(**kwargs)
         context['form'] = self.form
         return context
 
@@ -32,6 +34,20 @@ class GuestBookView(ArchiveIndexView):
             self.form = GuestBookForm(form_data)
             if self.form.is_valid():
                 self.form.save()
-                return redirect(reverse_lazy('guestbook'))
+                return redirect(reverse_lazy('guestbook:index'))
 
-        return super(GuestBookView, self).get(request, *args, **kwargs)
+        return super(GuestBookIndexView, self).get(request, *args, **kwargs)
+
+
+class GuestBookDeleteView(RedirectView):
+    url = reverse_lazy('guestbook:index')
+
+    def get(self, request, *args, **kwargs):
+        guestbook = get_object_or_404(GuestBook, id=kwargs['guestbook_id'])
+
+        if guestbook.usr == request.user or request.user.has_perm('guestbook.delete_guestbook'):
+            guestbook.delete()
+            success_msg = 'Ваш отзыв успешно удалён!'
+            messages.add_message(self.request, messages.SUCCESS, success_msg)
+
+        return super(GuestBookDeleteView, self).get(self, request, *args, **kwargs)

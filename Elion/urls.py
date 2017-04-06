@@ -4,7 +4,6 @@ from django.contrib import admin
 from main import views as main_views
 from about import views as about_views
 from services import views as services_views
-from guestbook import views as guestbook_views
 
 from . import settings
 
@@ -16,7 +15,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^contacts/$', about_views.ContactView.as_view(), name='contacts'),
     url(r'^news/', include('news.urls', namespace='news')),
-    url(r'^guestbook/$', guestbook_views.GuestBookView.as_view(), name='guestbook'),
+    url(r'^guestbook/', include('guestbook.urls', namespace='guestbook')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

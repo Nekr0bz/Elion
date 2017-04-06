@@ -21,7 +21,7 @@
                 {% include 'generic/messages.html' with default_text="Вы можете поделится своим мнение о работе нашей фирмы.<br>Для этого, заполните все поля формы ниже." %}
             </div> <!-- End section title -->
             <div class="form_holder" style="padding-right: 0px">
-                <form method="post" action="{% url 'guestbook' %}" class="contact-form">
+                <form method="post" action="{% url 'guestbook:index' %}" class="contact-form">
                     {% csrf_token %}
                     {{ form.text }}
                     <button type="submit" class="submit" style="margin-top: 10px; float: right">Оставить отзыв<i class="fa fa-arrow-circle-right"></i></button>
@@ -43,7 +43,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             {% if user.id == object.usr.id or perms.guestbook.change_guestbook %}<li><a>Изменить</a></li>{% endif %}
-                            {% if user.id == object.usr.id or perms.guestbook.delete_guestbook %}<li><a>Удалить</a></li>{% endif %}
+                            {% if user.id == object.usr.id or perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.id %}">Удалить</a></li>{% endif %}
                         </ul>
                     </div>
                 {% endif %}
