@@ -57,6 +57,17 @@
             </div>
             {% if object.guestbook %}
                 <div class="author-box" style="margin-top: 0">
+                    {% if perms.guestbook.change_guestbook or perms.guestbook.delete_guestbook %}
+                        <div class="dropdown" >
+                            <button class="three_dots dropdown-toggle" data-toggle="dropdown" style="margin-right: 20px; margin-top: 15px; background-color: #12a0b1">
+                                <span style="color: white">&#8942;</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                {% if perms.guestbook.change_guestbook %}<li><a>Изменить</a></li>{% endif %}
+                                {% if perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.guestbook.id %}">Удалить</a></li>{% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     <div class="top-author-info dt">
                         <div class="top-author-info-content dtc">
                             <h4>administrator <span>({{ object.guestbook.usr.get_full_name }})</span></h4>
