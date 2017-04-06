@@ -78,7 +78,7 @@ class SignInForm(auth_forms.AuthenticationForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Ваш пароль',
+            'placeholder': 'Ваш Пароль',
             'class': 'form-control'
         }),
     )
@@ -95,25 +95,25 @@ class SignUpForm(UserCreationForm):
     )
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={
-            'placeholder': 'Введите имя',
+            'placeholder': 'Введите Имя',
             'class': 'form-control'
         }),
     )
     last_name = forms.CharField(
         widget=forms.TextInput(attrs={
-            'placeholder': 'Введите фамлию',
+            'placeholder': 'Введите Фамлию',
             'class': 'form-control'
         }),
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Введите пароль',
+            'placeholder': 'Введите Пароль',
             'class': 'form-control'
         }),
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Повторите пароль',
+            'placeholder': 'Повторите Пароль',
             'class': 'form-control'
         }),
     )
