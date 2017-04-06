@@ -35,7 +35,9 @@
         <br><br>
         {% for object in latest %}
             <br><br>
+            <!-- review -->
             <div class="quote-box dt" style="padding-bottom: 15px">
+                <!-- three dots menu -->
                 {% if user.id == object.usr.id or perms.guestbook.change_guestbook or perms.guestbook.delete_guestbook %}
                     <div class="dropdown" >
                         <button class="three_dots dropdown-toggle" data-toggle="dropdown" style="margin-right: 20px">
@@ -47,6 +49,7 @@
                         </ul>
                     </div>
                 {% endif %}
+                <!-- End three dots menu -->
                 <div class="quote-content dtc" >
                     <p style="margin-bottom: 3px; padding-top: 18px; font-style: normal">{{ object.text }}</p>
                     <span class="name">- {{ object.usr.get_full_name }}</span>
@@ -57,8 +60,11 @@
                     {% endif %}
                 </div>
             </div>
+            <!-- End review -->
+            <!-- reply -->
             {% if object.guestbook %}
                 <div class="author-box" style="margin-top: 0">
+                    <!-- three dots menu --><!-- TODO: мб вынести? -->
                     {% if perms.guestbook.change_guestbook or perms.guestbook.delete_guestbook %}
                         <div class="dropdown" >
                             <button class="three_dots dropdown-toggle" data-toggle="dropdown" style="margin-right: 20px; margin-top: 15px; background-color: #12a0b1">
@@ -70,6 +76,7 @@
                             </ul>
                         </div>
                     {% endif %}
+                    <!-- End three dots menu -->
                     <div class="top-author-info dt">
                         <div class="top-author-info-content dtc">
                             <h4>administrator <span>({{ object.guestbook.usr.get_full_name }})</span></h4>
@@ -78,6 +85,7 @@
                     </div>
                 </div>
             {% endif %}
+            <!-- End reply -->
         {% endfor %}
         <article class="blog-variation-container" style="padding-top: 0px">
             {% include 'generic/pagination.html' %}
