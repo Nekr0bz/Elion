@@ -5,7 +5,11 @@ from .models import GuestBook
 
 
 class GuestBookForm(forms.ModelForm):
-    text = forms.CharField(widget=forms.Textarea, label="Отзыв")
+    text = forms.CharField(widget=forms.Textarea(attrs={
+        'style': 'width :100%; height: 100px',
+        'class': 'form-control',
+        'placeholder': 'Оставьте ваш отзыв'
+    }))
 
     class Meta:
         fields = ['text', 'usr']

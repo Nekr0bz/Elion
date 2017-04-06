@@ -1,41 +1,66 @@
 {% extends "main/main.html" %}
+{% load staticfiles %}
 {% block title %}Отзывы{% endblock %}
+{% block body_class %}faqs{% endblock %}
+
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        <p>{{ form.text }}</p>
-        <input type="submit">
-    </form>
+<!-- ======= Banner ======= -->
+{% include 'generic/banner.html' with this_section="Отзывы"%}
+<!-- ================= /Banner ================ -->
 
-    {% for object in latest %}
-        <p>{{ object.text }}</p>
-        <p>{{ object.datetime }}</p>
-        <p>{{ object.usr }}</p>
-        <hr>
-    {% endfor %}
+<!-- =============== blog container ============== -->
+<section class="contact_us_container" style="padding-top: 40px">
+    <div class="container">
+        <div class="form_holder" style="padding-right: 0px">
+            <form method="post" action="{% url 'guestbook' %}" class="contact-form">
+                {% csrf_token %}
+                {{ form.text }}
+                <button type="submit" class="submit" style="margin-top: 10px; float: right">Оставить отзыв<i class="fa fa-arrow-circle-right"></i></button>
+            </form>
+        </div>
+        <br><br>
+        {% for object in latest %}
+            <br><br>
+            <div class="quote-box dt">
+                <div class="quote-content dtc">
+                    <p style="margin-bottom: 3px;">{{ object.text }}</p>
+                    <span class="name">- {{ object.usr.get_full_name }}</span>
+                    <span class="name" style="color: #337ab7; margin-top: 5px">{{ object.datetime|date:"F d o" }}</span>
+                </div>
+            </div>
+        {% endfor %}
 
-    {% if paginator.num_pages > 1 %}
+            <article class="blog-variation-container" style="padding-top: 0px">
+            <!-- pagination -->
+            {% if paginator.num_pages > 1 %}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination ">
+                <ul>
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number}}"><i class="fa fa-long-arrow-left"></i></a></li>
+                    {% endif %}
 
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number}}">&lt;</a>
-        {% endif %}
+                    {% for pn in paginator.page_range %}
+                        {% if page_obj.number != pn %}
+                            <li><a href="?page={{ pn }}">{{ pn }}</a></li>
+                        {% else %}
+                            <li><a class="active">{{ pn }}</a></li>
+                        {% endif %}
+                    {% endfor %}
 
-          {% for pn in paginator.page_range %}
-            {% if not forloop.first %}
-              &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-long-arrow-right"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
             {% endif %}
-            {% if page_obj.number != pn %}
-              <a href="?page={{ pn }}">
-            {% endif %}
-            {{ pn }}
-            {% if page_obj.number != pn %}
-              </a>
-            {% endif %}
-          {% endfor %}
+            <!-- End pagination --><!--TODO: ограничение кол-ва страниц пагинации-->
+            </article>
 
-        {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
-        {% endif %}
+    </div>
+</section>
+<!-- =============== /blog container ============== -->
+{% endblock %}
 
-    {% endif %}
+{% block add_js %}
+    <script type="text/javascript" src="{% static 'vendors/js/jquery.mixitup.min.js' %}"></script>
 {% endblock %}

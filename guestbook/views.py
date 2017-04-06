@@ -23,13 +23,13 @@ class GuestBookView(ArchiveIndexView):
         return context
 
     def post(self, request, *args, **kwargs):
-        form_data = {
-            'usr': request.user.id,
-            'text': request.POST['text'].encode('utf-8')
-        }
-        self.form = GuestBookForm(form_data)
-        if self.form.is_valid():
-            self.form.save()
-            return redirect('guestbook:index')
-        else:
-            return super(GuestBookView, self).get(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            form_data = {
+                'usr': request.user.id,
+                'text': request.POST['text'].encode('utf-8')
+            }
+            self.form = GuestBookForm(form_data)
+            if self.form.is_valid():
+                self.form.save()
+
+        return super(GuestBookView, self).get(request, *args, **kwargs)
