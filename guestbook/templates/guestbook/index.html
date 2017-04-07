@@ -54,7 +54,7 @@
                     <p style="margin-bottom: 3px; padding-top: 18px; font-style: normal">{{ object.text }}</p>
                     <span class="name">- {{ object.usr.get_full_name }}</span>
                     {% if perms.guestbook.change_guestbook %}
-                        <span class="name" style="color: #337ab7; margin-top: 5px"><a class="showReply" href="#" id="{{ object.id }}"><b>Ответить</b></a> | {{ object.datetime|date:"F d o" }}</span>
+                        <span class="name" style="color: #337ab7; margin-top: 5px"><a class="showReply" id="{{ object.id }}"><b>Ответить</b></a> | {{ object.datetime|date:"F d o" }}</span>
                     {% else %}
                         <span class="name" style="color: #337ab7; margin-top: 5px">{{ object.datetime|date:"F d o" }}</span>
                     {% endif %}
