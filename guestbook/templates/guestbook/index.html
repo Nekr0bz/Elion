@@ -82,7 +82,7 @@
                                 <span style="color: white">&#8942;</span>
                             </button>
                             <ul class="dropdown-menu">
-                                {% if perms.guestbook.change_guestbook %}<li><a>Изменить</a></li>{% endif %}
+                                {% if perms.guestbook.change_guestbook %}<li><a class="changeReply" id="{{ object.id }}">Изменить</a></li>{% endif %}
                                 {% if perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.guestbook.id %}">Удалить</a></li>{% endif %}
                             </ul>
                         </div>
