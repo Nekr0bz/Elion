@@ -1,6 +1,5 @@
 {% extends "main/main.html" %}
 {% load staticfiles %}
-{% load guestbook_extras %}
 
 {% block title %}Отзывы{% endblock %}
 
@@ -35,7 +34,7 @@
             </div> <!-- End section title -->
         {% endif %}
         <br><br>
-        {% for object in latest|filter_parent %}
+        {% for object in latest %}
             <br><br>
             <!-- review -->
             <div class="quote-box dt" style="padding-bottom: 15px">

@@ -15,6 +15,7 @@ class GuestBookIndexView(ArchiveIndexView):
     allow_empty = True
     form = None
     paginate_by = 10
+    queryset = GuestBook.objects.filter(parent=None)
 
     def get(self, request, *args, **kwargs):
         self.form = GuestBookForm()
