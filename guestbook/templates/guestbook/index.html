@@ -54,7 +54,7 @@
                     <p style="margin-bottom: 3px; padding-top: 18px; font-style: normal">{{ object.text }}</p>
                     <span class="name">- {{ object.usr.get_full_name }}</span>
                     {% if perms.guestbook.change_guestbook %}
-                        <span class="name" style="color: #337ab7; margin-top: 5px"><a href=""><b>Ответить</b></a> | {{ object.datetime|date:"F d o" }}</span>
+                        <span class="name" style="color: #337ab7; margin-top: 5px"><a class="showReply" href="#" id="{{ object.id }}"><b>Ответить</b></a> | {{ object.datetime|date:"F d o" }}</span>
                     {% else %}
                         <span class="name" style="color: #337ab7; margin-top: 5px">{{ object.datetime|date:"F d o" }}</span>
                     {% endif %}
@@ -62,11 +62,11 @@
             </div>
             <!-- End review -->
             <!-- universal form -->
-            <div class="form_holder form_universal hide" style="padding-right: 0">
+            <div id="{{ object.id }}" class="form_holder form_universal hide" style="padding-right: 0">
                 <form method="post" class="contact-form">
                     {% csrf_token %}
                     {{ form.text }}
-                    <button class="submit btn-review" id="{{ object.id }}">Действие</button>
+                    <button class="submit btn-review">Действие</button>
                     <button class="cancel btn-review">Отменить</button>
                 </form>
                 <br>
@@ -107,5 +107,6 @@
 {% endblock %}
 
 {% block add_js %}
+    <script type="text/javascript" src="{% static 'guestbook/js/universal_form.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendors/js/jquery.mixitup.min.js' %}"></script>
 {% endblock %}
