@@ -25,3 +25,31 @@
 .open > .dropdown-menu {
     display: flex;
 }
+
+.contact_us_container .form_holder button.btn-review {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.875em;
+    padding: 0 30px;
+    color: #fff;
+    background: #12a0b1;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    line-height: 33px;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-left: 15px;
+    float: right;
+}
+
+.contact_us_container .form_holder button.btn-review:after{
+    background-color: rgba(255, 205, 71, 0);
+}
+
+.contact_us_container .form_holder button.btn-review:before{
+    background-color: rgba(255, 205, 71, 0);
+}
+
+div.form_holder.form_universal {
+    margin-bottom: 35px;
+}

@@ -61,6 +61,17 @@
                 </div>
             </div>
             <!-- End review -->
+            <!-- universal form -->
+            <div class="form_holder form_universal hide" style="padding-right: 0">
+                <form method="post" class="contact-form">
+                    {% csrf_token %}
+                    {{ form.text }}
+                    <button class="submit btn-review" id="{{ object.id }}">Действие</button>
+                    <button class="cancel btn-review">Отменить</button>
+                </form>
+                <br>
+            </div>
+            <!-- End universal form -->
             <!-- reply -->
             {% if object.guestbook %}
                 <div class="author-box" style="margin-top: 0">
@@ -77,9 +88,9 @@
                         </div>
                     {% endif %}
                     <!-- End three dots menu -->
-                    <div class="top-author-info dt">
+                    <div class="top-author-info dt" style="padding-left: 0">
                         <div class="top-author-info-content dtc">
-                            <h4>administrator <span>({{ object.guestbook.usr.get_full_name }})</span></h4>
+                            <h4>администратор <span>({{ object.guestbook.usr.get_full_name }})</span></h4>
                             <p style="color: #fff; font-style: normal; padding-top: 0">{{ object.guestbook.text }}</p>
                         </div>
                     </div>
