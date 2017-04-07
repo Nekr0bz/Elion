@@ -15,8 +15,8 @@
 
         showReply: function (e) {
             app.returnChanges(e);
-
-            var obj_id = $(this).attr('id'),
+            // TODO: ajax
+            var obj_id = $(this).attr('data-objid'),
                 reply = $('div[id='+obj_id+']');
 
             $(reply).find('textarea').attr('placeholder', 'Ответить на отзыв клиента');
@@ -29,7 +29,7 @@
         showChangeReview: function (e) {
             app.returnChanges(e);
 
-            var obj_id = $(this).attr('id'),
+            var obj_id = $(this).attr('data-objid'),
                 new_review = $('div[id='+obj_id+']'),
                 this_review = $(this).parents('div.quote-box'),
                 obj_text = $(this_review).find('p').html();
@@ -45,7 +45,7 @@
         showChangeReply: function (e) {
             app.returnChanges(e);
 
-            var obj_id = $(this).attr('id'),
+            var obj_id = $(this).attr('data-objid'),
                 new_reply = $('div[id='+obj_id+']'),
                 parent_id = $(new_reply).attr('data-parentid'),
                 this_reply = $(this).parents('div.author-box'),
