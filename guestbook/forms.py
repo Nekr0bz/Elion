@@ -12,5 +12,5 @@ class GuestBookForm(forms.ModelForm):
     }))
 
     class Meta:
-        fields = ['text', 'usr']
+        fields = ['text', 'usr', 'parent']
         model = GuestBook

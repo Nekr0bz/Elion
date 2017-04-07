@@ -9,7 +9,7 @@
         setUpListeners: function () {
             $('.showReply').on('click', app.showReply);
             $('a.changeReview').on('click', app.showChangeReview);
-            $('a.changeReply').on('click', app.changeReply);
+            $('a.showChangeReply').on('click', app.showChangeReply);
             $('button.cancel').on('click', app.returnChanges);
         },
 
@@ -21,6 +21,7 @@
 
             $(reply).find('textarea').attr('placeholder', 'Ответить на отзыв клиента');
             $(reply).find('button.submit').html('Ответить').attr('id','showReply');
+            $(reply).find('form').attr('action','/guestbook/reply/'+obj_id+'/');
 
             $(reply).removeClass('hide').addClass('show');
         },
@@ -40,7 +41,7 @@
             $(new_review).removeClass('hide').addClass('show');
         },
 
-        changeReply: function (e) {
+        showChangeReply: function (e) {
             app.returnChanges(e);
 
             var obj_id = $(this).attr('id'),
@@ -50,7 +51,7 @@
 
             $(this_reply).addClass('hide');
             $(new_reply).find('textarea').html(obj_text).attr('placeholder', 'Ответить на отзыв клиента');
-            $(new_reply).find('button.submit').html('Сохранить').attr('id','changeReply');
+            $(new_reply).find('button.submit').html('Сохранить').attr('id','showChangeReply');
 
             $(new_reply).removeClass('hide').addClass('show');
         },

@@ -14,7 +14,7 @@ class GuestBookIndexView(ArchiveIndexView):
     date_field = 'datetime'
     allow_empty = True
     form = None
-    paginate_by = 5
+    paginate_by = 10
 
     def get(self, request, *args, **kwargs):
         self.form = GuestBookForm()
@@ -27,7 +27,10 @@ class GuestBookIndexView(ArchiveIndexView):
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            guestbook_id = kwargs.get('guestbook_id', None)
+            parent_id = get_object_or_404(GuestBook, id=guestbook_id).id if guestbook_id else None
             form_data = {
+                'parent': parent_id,
                 'usr': request.user.id,
                 'text': request.POST['text'].encode('utf-8')
             }
