@@ -44,7 +44,7 @@
                             <span>&#8942;</span>
                         </button>
                         <ul class="dropdown-menu">
-                            {% if user.id == object.usr.id or perms.guestbook.change_guestbook %}<li><a>Изменить</a></li>{% endif %}
+                            {% if user.id == object.usr.id or perms.guestbook.change_guestbook %}<li><a class="changeReview" id="{{ object.id }}">Изменить</a></li>{% endif %}
                             {% if user.id == object.usr.id or perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.id %}">Удалить</a></li>{% endif %}
                         </ul>
                     </div>
