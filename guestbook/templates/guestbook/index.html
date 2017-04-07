@@ -64,7 +64,7 @@
             </div>
             <!-- End review -->
             <!-- universal form -->
-            <div id="{{ object.id }}" class="form_holder form_universal hide" style="padding-right: 0">
+            <div id="{{ object.id }}" data-parentid="{{ object.guestbook.id }}" class="form_holder form_universal hide" style="padding-right: 0">
                 <form method="post" class="contact-form">
                     {% csrf_token %}
                     {{ form.text }}
