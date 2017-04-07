@@ -37,7 +37,7 @@ class GuestBookIndexView(ArchiveIndexView):
             self.form = GuestBookForm(form_data)
             if self.form.is_valid():
                 self.form.save()
-                return redirect(reverse_lazy('guestbook:index'))
+                return redirect(self.request.META.get('HTTP_REFERER', '/'))
 
         return super(GuestBookIndexView, self).get(request, *args, **kwargs)
 
