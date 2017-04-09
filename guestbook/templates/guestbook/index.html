@@ -19,7 +19,7 @@
     <div class="container">
         {% if user.is_authenticated %}
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center; padding-bottom: 20px"> <!-- section title -->
-                {% include 'generic/messages.html' with default_text="Вы можете поделится своим мнение о работе нашей фирмы.<br>Для этого, заполните все поля формы ниже." %}
+                {% include 'generic/messages.html' with default_text="Вы можете поделится своим мнением о работе нашей фирмы.<br>Для этого, оставьте отзыв." %}
             </div> <!-- End section title -->
             <div class="form_holder" style="padding-right: 0px">
                 <form method="post" action="{% url 'guestbook:index' %}" class="contact-form">

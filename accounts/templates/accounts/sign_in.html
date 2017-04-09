@@ -6,19 +6,18 @@
 <!-- ======= Banner ======= -->
 {% include 'generic/banner.html' with this_section="Авторизация"%}
 <!-- ================= /Banner ================ -->
-<section class="contact_us_container">
+<section class="contact_us_container" style="padding-top: 0">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;"> <!-- section title -->
-                <h2>Авторизация</h2>
-                {% include 'generic/messages.html' with default_text="Заполните все поля формы ниже." %}
+                {% include 'generic/messages.html' with default_text="Для того, чтобы авторизироваться на сайте,<br>заполните все поля формы ниже." %}
             </div> <!-- End section title -->
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 form_holder" style="padding-bottom: 50px; margin-left: 20%"> <!-- form holder -->
                 <form action="{% url 'accounts:login' %}?next={{ next }}" class="contact-form" method="post">
                     {% include 'generic/forms.html' %}
                     <button type="submit" class="submit pull-right">Войти<i class="fa fa-arrow-circle-o-up"></i></button>
                     <!--TODO:Востановить пароль-->
-                    <button class="submit pull-right" style="background-color: rgb(255, 221, 0); margin-right: 15px">Вспомнить пароль<i class="fa fa-undo"></i></button>
+                    <!--button class="submit pull-right" style="background-color: rgb(255, 221, 0); margin-right: 15px">Вспомнить пароль<i class="fa fa-undo"></i></button-->
                 </form> <!-- End form holder -->
             </div>
         </div>
