@@ -128,6 +128,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 THUMBNAIL_BASEDIR = "thumbnails"
 THUMBNAIL_DEFAULT_OPTIONS = {"crop": "smart"}
 THUMBNAIL_ALIASES = {
+    "about.StaticDates": {
+        "about_adm": {"size": (150, 150)},
+    },
     "services.Service": {
         "srvc_adm": {"size": (150, 150)},
         "srvc_main": {"size": (730, 305)}
@@ -143,6 +146,7 @@ THUMBNAIL_ALIASES = {
         "news_detail": {"size": (1148, 360)}
     }
 }
+
 
 AUTH_USER_MODEL = 'accounts.User'
 
