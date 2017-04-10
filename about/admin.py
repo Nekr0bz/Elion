@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from easy_thumbnails.files import get_thumbnailer
 from Elion.settings import THUMBNAIL_ALIASES as th_options
-from .models import  StaticDates, FourValuesCompany, AreasWork, Employees
+from .models import StaticDates, FourValuesCompany, AreasWork, Employees, ValuesCompany
 
 
 class FourValuesCompanyInline(admin.StackedInline):
@@ -46,3 +46,4 @@ class EmployeesAdmin(admin.ModelAdmin):
 admin.site.register(StaticDates, StaticDatesAdmin)
 admin.site.register(AreasWork)
 admin.site.register(Employees, EmployeesAdmin)
+admin.site.register(ValuesCompany)

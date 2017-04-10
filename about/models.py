@@ -82,6 +82,18 @@ class Employees(models.Model):
         return self.avatar,
 
 
+class ValuesCompany(models.Model):
+    title_main = models.CharField('Главный заголовок', max_length=20)
+    title_other = models.CharField('Второй заголовок', max_length=50)
+    text = models.TextField('Описание')
+
+    class Meta:
+        verbose_name = 'Ценности компании'
+        verbose_name_plural = 'Ценности компании'
+
+    def __unicode__(self):
+        return self.title_main
+
 # Регистрация callback-функций сигналов
 pre_delete.connect(del_imgs__pre_delete, sender=StaticDates)
 pre_save.connect(del_imgs__pre_save, sender=StaticDates)
