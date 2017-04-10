@@ -62,6 +62,28 @@ class FourValuesCompany(models.Model):
     desc2 = models.CharField('Вторая строка описания', max_length=20)
 
 
+class Employees(models.Model):
+    full_name = models.CharField('Полное имя', max_length=30)
+    position = models.CharField('Должность', max_length=30)
+    contact = models.CharField('Контактная информация', max_length=30, blank=True,
+                               help_text='Email, телефон или персональный сайт')
+    review = models.TextField('Отзыв сотрудника', max_length=255)
+    avatar = models.ImageField(upload_to='employees/', help_text='130x130px', verbose_name='Фотография сотрудника')
+
+    class Meta:
+        db_table = 'Employees'
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
+
+    def __unicode__(self):
+        return self.full_name
+
+    def get_images_fields(self):
+        return self.avatar,
+
+
 # Регистрация callback-функций сигналов
 pre_delete.connect(del_imgs__pre_delete, sender=StaticDates)
 pre_save.connect(del_imgs__pre_save, sender=StaticDates)
+pre_delete.connect(del_imgs__pre_delete, sender=Employees)
+pre_save.connect(del_imgs__pre_save, sender=Employees)
