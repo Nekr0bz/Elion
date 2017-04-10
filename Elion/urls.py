@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^services/$', services_views.ServicesMainViews.as_view(), name='services'),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^about/$', about_views.AboutView.as_view(), name='about'),
     url(r'^contacts/$', about_views.ContactView.as_view(), name='contacts'),
     url(r'^submitapp/$', about_views.SubmitAppView.as_view(), name='submit_app'),
     url(r'^news/', include('news.urls', namespace='news')),
