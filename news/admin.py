@@ -24,7 +24,7 @@ class NewsAdmin(admin.ModelAdmin):
 
     def image_thumb(self, obj):
         th = get_thumbnailer(obj.img)
-        th = th.get_thumbnail(th_options["news.News"]["news_adm"])
+        th = th.get_thumbnail(th_options["for_admin_panel"])
         ret = '<a href="' + str(obj.img.url) + '"><img src=/media/' + str(th) + '/></a>'
         return mark_safe(ret)
 

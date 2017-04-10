@@ -24,7 +24,7 @@ class StaticDatesAdmin(admin.ModelAdmin):
 
     def thumb_mission_img(self, obj):
         th = get_thumbnailer(obj.mission_img)
-        th = th.get_thumbnail(th_options["about.StaticDates"]["about_adm"])
+        th = th.get_thumbnail(th_options["for_admin_panel"])
         ret = '<a href="'+str(obj.mission_img.url)+'"><img src=/media/'+str(th)+'/></a>'
         return mark_safe(ret)
     thumb_mission_img.short_description = 'Миниатюра изображения'
@@ -36,7 +36,7 @@ class EmployeesAdmin(admin.ModelAdmin):
 
     def thumb_avatar(self, obj):
         th = get_thumbnailer(obj.avatar)
-        th = th.get_thumbnail(th_options["about.Employees"]["avatar_adm"])
+        th = th.get_thumbnail(th_options["for_admin_panel"])
         ret = '<a href="'+str(obj.avatar.url)+'"><img src=/media/'+str(th)+'/></a>'
         return mark_safe(ret)
     thumb_avatar.short_description = 'Миниатюра изображения'

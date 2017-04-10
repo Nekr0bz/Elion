@@ -128,25 +128,21 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 THUMBNAIL_BASEDIR = "thumbnails"
 THUMBNAIL_DEFAULT_OPTIONS = {"crop": "smart"}
 THUMBNAIL_ALIASES = {
+    "for_admin_panel": {"size": (150, 150)},
     "about.StaticDates": {
-        "about_adm": {"size": (150, 150)},
         "mission": {"size": (470, 167)},
     },
     "about.Employees": {
-        "avatar_adm": {"size": (150, 150)},
         "avatar": {"size": (130, 130)},
     },
     "services.Service": {
-        "srvc_adm": {"size": (150, 150)},
         "srvc_main": {"size": (730, 305)}
     },
     "services.ServiceSections": {
-        "section_adm": {"size": (150, 150)},
         "section_srvc": {"size": (248, 199)},
         "section_desc": {"size": (151, 161)}
     },
     "news.News": {
-        "news_adm": {"size": (150, 150)},
         "news_list": {"size": (548, 260)},
         "news_detail": {"size": (1148, 360)}
     }
