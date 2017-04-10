@@ -130,9 +130,11 @@ THUMBNAIL_DEFAULT_OPTIONS = {"crop": "smart"}
 THUMBNAIL_ALIASES = {
     "about.StaticDates": {
         "about_adm": {"size": (150, 150)},
+        "mission": {"size": (470, 167)},
     },
     "about.Employees": {
         "avatar_adm": {"size": (150, 150)},
+        "avatar": {"size": (130, 130)},
     },
     "services.Service": {
         "srvc_adm": {"size": (150, 150)},

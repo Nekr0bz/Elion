@@ -41,7 +41,7 @@ class StaticDates(models.Model):
     description_services = models.TextField('Общее описание услуг')
     who_we_are1 = models.TextField('"Кто мы?" - первый абзац')
     who_we_are2 = models.TextField('"Кто мы?" - второй абзац')
-    value_company = models.TextField('Ценности компании')
+    value_company = models.TextField('Гордость компании')
 
     class Meta:
         db_table = 'StaticDates'
@@ -60,6 +60,9 @@ class FourValuesCompany(models.Model):
     number = models.IntegerField('Число')
     desc1 = models.CharField('Первая строка описания', max_length=20)
     desc2 = models.CharField('Вторая строка описания', max_length=20)
+
+    def get_start_number(self):
+        return 1 if self.number < 30 else 10
 
 
 class Employees(models.Model):

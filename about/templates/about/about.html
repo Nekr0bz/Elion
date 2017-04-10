@@ -1,3 +1,113 @@
 {% extends "main/main.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block add_css %}
+    <!-- owl-carousel css -->
+    <link href="{% static 'vendors/css/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/css/owl.theme.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block title %}О компании{% endblock %}
+{% block body_class %}about{% endblock %}
+
+{% block content %}
+<!-- ======= Banner ======= -->
+{% include 'generic/banner.html' with this_section="Контакты"%}
+<!-- ================= /Banner ================ -->
+
+<!-- ============ Our history ========== -->
+<section class="history_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 left-side">
+                <h2>Наша история</h2>
+                <p>{{ static_dates.history }}</p>
+            </div>
+            <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12 right_side">
+                <img class="img-responsive" src="{% thumbnail static_dates.mission_img "mission" %}" alt="image">
+                <h3>Cпециализация компании</h3>
+                <p>{{ static_dates.mission }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============ /Our history ========== -->
+
+<!-- ==========Value Of our Company ======= -->
+<section class="company_value_sec">
+    <div class="company_value_opacity">
+        <div class="container">
+            <div class="company_value_heading">
+                <div class="title-box" style="width: 284px">
+                    <h2>Гордость нашей <br>Компании</h2>
+                </div>
+                <div class="text-box">
+                    <p>{{ static_dates.value_company }}</p>
+                </div>
+            </div> <!-- End Row -->
+            <div class="row value_fact">
+            {% for value in static_dates.fourvaluescompany_set.all %}
+                <span class="timer" data-from="{{ value.get_start_number }}" data-to="{{ value.number }}" data-speed="5000" data-refresh-interval="50">{{ value.number }}</span>
+                <p>{{ value.desc1 }}<br>{{ value.desc2 }}</p>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========/Value Of our Company ======= -->
+
+<!-- ======= Testimonial & Company Values ======= -->
+<section class="testimonial_sec clear_fix">
+    <div class="container">
+        <div class="row">
+            <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12 testimonial_container">
+                <div class="sec-title">
+                    <h2>Наш персонал</h2>
+                </div>
+                <div id="owl">
+                    {% for employ in employees %}
+                    <div>
+                        <div class="testimonial">
+                            <img class="round_img" src="{% thumbnail employ.avatar "avatar" %}" alt="images">
+                            <div class="float_right client_info">
+                                <p>{{ employ.full_name }}</p>
+                                <span>{{ employ.position }}</span><br>
+                                <span>{{ employ.contact }}</span>
+                            </div>
+                        </div>
+                        <p class="john_speach">{{ employ.review }}</p>
+                    </div>
+                    {% endfor %}
+                </div> <!-- End owl -->
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 company">
+                <h2>Ценности нашей компании</h2>
+                <div class="company-tab">
+                    <ul class="nav nav-pills nav-justified">
+                    {% for val in values_company %}
+                        <li{% if forloop.first %} class="active"{% endif %}>
+                            <a data-toggle="pill" href="#menu{{ val.id }}">{{ val.title_main }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                     <div class="tab-content">
+                     {% for val in values_company %}
+                        <div id="menu{{ val.id }}" class="tab-pane fade {% if forloop.first %} in active{% endif %}">
+                            <h3>{{ val.title_other }}</h3>
+                            <p>{{ val.text }}</p>
+                        </div>
+                     {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div> <!-- End row -->
+    </div> <!-- End Container -->
+</section> <!-- testimonial -->
+<!-- ======= /Testimonial & Company Values ======= -->
+{% endblock %}
+
+{% block add_js %}
+    <script type="text/javascript" src="{% static 'vendors/js/owl.carousel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/js/owl-custom.js' %}"></script>
+{% endblock %}
