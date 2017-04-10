@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^services/$', services_views.ServicesMainViews.as_view(), name='services'),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^contacts/$', about_views.ContactView.as_view(), name='contacts'),
+    url(r'^submitapp/$', about_views.SubmitAppView.as_view(), name='submit_app'),
     url(r'^news/', include('news.urls', namespace='news')),
     url(r'^guestbook/', include('guestbook.urls', namespace='guestbook')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

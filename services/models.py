@@ -6,10 +6,17 @@ from ckeditor.fields import RichTextField
 from generic.signals import del_imgs__pre_delete, del_imgs__pre_save
 
 
+class ServiceManager(models.Manager):
+    def get_list_dates(self):
+        return [(obj.id, obj.title) for obj in self.all()]
+
+
 class Service(models.Model):
     title = models.CharField(max_length=50, unique=True, verbose_name='Заголовок')
     main_img = models.ImageField(upload_to='services/', verbose_name='Основное изображение', help_text='730х305px')
     content = RichTextUploadingField(verbose_name='Основное описание')
+
+    objects = ServiceManager()
 
     class Meta:
         verbose_name = 'Услуга'

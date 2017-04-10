@@ -1,0 +1,118 @@
+#checkout-content input{
+    color: black !important;
+}
+#checkout-content label {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 500;
+    font-size: 14px;
+    line-height: 26px;
+    color: #8e8d8d;
+    margin-bottom: 5px;
+}
+
+#checkout-content input::-webkit-input-placeholder { /* Safari, Chrome and Opera */
+  color: #C6C6C6;
+}
+
+#checkout-content input:-moz-placeholder { /* Firefox 18- */
+  color: #C6C6C6;
+}
+
+#checkout-content input::-moz-placeholder { /* Firefox 19+ */
+    color: #C6C6C6;
+}
+
+#checkout-content input:-ms-input-placeholder { /* IE 10+ */
+  color: #C6C6C6;
+}
+
+#checkout-content input::-ms-input-placeholder { /* Edge */
+  color: #C6C6C6;
+}
+
+#checkout-content input:placeholder-shown { /* Standard one last! */
+  color: #C6C6C6;
+}
+
+
+#checkout-content input,
+#checkout-content .left-checkout button {
+    width: 100%;
+    margin-bottom: 10px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #E2E2E2;
+    border-radius: 0px;
+    background: #fff;
+    box-shadow: none;
+    outline: none;
+    padding: 0 20px;
+    font-size: 14px;
+    color: #C6C6C6;
+}
+
+#checkout-content :last-child {
+    margin-bottom: 0;
+}
+
+#checkout-content select {
+	box-shadow: none;
+    border-color: #e2e2e2;
+    height: 40px;
+    border-radius: initial;
+    margin-bottom: 10px;
+}
+
+#checkout-content option[value=''] {
+	color: #C6C6C6;
+}
+
+#checkout-content textarea {
+	height: 82px;
+}
+
+#checkout-content textarea::-webkit-input-placeholder { /* Safari, Chrome and Opera */
+  color: #C6C6C6;
+}
+
+#checkout-content textarea:-moz-placeholder { /* Firefox 18- */
+  color: #C6C6C6;
+}
+
+#checkout-content textarea::-moz-placeholder { /* Firefox 19+ */
+    color: #C6C6C6;
+}
+
+#checkout-content textarea:-ms-input-placeholder { /* IE 10+ */
+  color: #C6C6C6;
+}
+
+#checkout-content textarea::-ms-input-placeholder { /* Edge */
+  color: #C6C6C6;
+}
+
+#checkout-content textarea:placeholder-shown { /* Standard one last! */
+  color: #C6C6C6;
+}
+
+#checkout-content button.submit:hover {
+    color: #fff;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-delay: initial;
+}
+
+#checkout-content button.submit {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1em;
+    background: #f6ba18;
+    color: #282f39;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    position: relative;
+    float: right !important;
+    width: initial;
+}

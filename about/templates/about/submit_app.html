@@ -1,0 +1,78 @@
+{% extends "main/main.html" %}
+{% load staticfiles %}
+
+{% block title %}Оставить заявку{% endblock %}
+
+{% block add_css%}
+    <link href="{% static 'about/css/extra_forms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body_class %}checkout_page{% endblock %}
+{% block content %}
+<!-- ======= Banner ======= -->
+{% include 'generic/banner.html' with this_section="Оставить заявку"%}
+<!-- ================= /Banner ================ -->
+<section id="checkout-content" class="contact_us_container" style="padding-top: 0">
+    <div class="container">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center; padding-bottom: 20px"> <!-- section title -->
+            {% include 'generic/messages.html' with default_text="Вы можете оставить заявку и мы свяжемся с вами.<br>Для этого, оставьте отзыв." %}
+        </div> <!-- End section title -->
+        <form action="{% url 'submit_app' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 left-checkout">
+                    <div class="section-title">
+                        <h2 style="text-transform: none">Данные заявки</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6" style="padding-left:0px;">
+                            <label>{{ form.first_name.label }} <span>*</span></label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col-lg-6 left_position_fix">
+                            <label>{{ form.last_name.label }} <span>*</span></label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6" style="padding-left:0px;">
+                            <label>{{ form.email.label }}<span>*</span></label>
+                            {{ form.email }}
+                        </div>
+                        <div class="col-lg-6 left_position_fix">
+                            <label>{{ form.phone.label }}<span>*</span></label>
+                            {{ form.phone }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" style="padding-left:0px;">
+                            <label>{{ form.service.label }}<span>*</span></label>
+                            {{ form.service }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 left-checkout">
+                    <div class="section-title">
+                        <h2 style="text-transform: none">Данные о местоположении</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" style="padding-left:0px;">
+                            <label>Адресс <span>*</span></label>
+                            {{ form.region }}
+                            {{ form.address }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" style="padding-left:0px;">
+                            <label>{{ form.message.label }}</label>
+                            {{ form.message }}
+                        </div>
+                    </div>
+                    <button type="submit" class="submit">Отправить заявку</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
