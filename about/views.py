@@ -4,6 +4,7 @@ from django.views.generic.base import TemplateView
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from .forms import ContactMessageForm, SubmitApplication
+from .models import ValuesCompany, Employees, StaticDates
 
 
 class ContactView(FormView):
@@ -33,3 +34,10 @@ class SubmitAppView(FormView):
 
 class AboutView(TemplateView):
     template_name = "about/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+        context['static_dates'] = StaticDates.objects.all().last()
+        context['employees'] = Employees.objects.all()
+        context['values_company'] = ValuesCompany.objects.all()
+        return context
