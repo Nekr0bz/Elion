@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from easy_thumbnails.files import get_thumbnailer
 from Elion.settings import THUMBNAIL_ALIASES as th_options
-from .models import  StaticDates, FourValuesCompany, AreasWork
+from .models import  StaticDates, FourValuesCompany, AreasWork, Employees
 
 
 class FourValuesCompanyInline(admin.StackedInline):
@@ -30,6 +30,19 @@ class StaticDatesAdmin(admin.ModelAdmin):
     thumb_mission_img.short_description = 'Миниатюра изображения'
 
 
+class EmployeesAdmin(admin.ModelAdmin):
+    readonly_fields = ('thumb_avatar',)
+    fields = ('full_name', 'position', 'contact', 'review', ('thumb_avatar', 'avatar'))
+
+    def thumb_avatar(self, obj):
+        th = get_thumbnailer(obj.avatar)
+        th = th.get_thumbnail(th_options["about.Employees"]["avatar_adm"])
+        ret = '<a href="'+str(obj.avatar.url)+'"><img src=/media/'+str(th)+'/></a>'
+        return mark_safe(ret)
+    thumb_avatar.short_description = 'Миниатюра изображения'
+
+
 # Регистрация интерфейса для администратора в соответствии с моделями:
 admin.site.register(StaticDates, StaticDatesAdmin)
 admin.site.register(AreasWork)
+admin.site.register(Employees, EmployeesAdmin)

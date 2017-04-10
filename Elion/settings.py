@@ -131,6 +131,9 @@ THUMBNAIL_ALIASES = {
     "about.StaticDates": {
         "about_adm": {"size": (150, 150)},
     },
+    "about.Employees": {
+        "avatar_adm": {"size": (150, 150)},
+    },
     "services.Service": {
         "srvc_adm": {"size": (150, 150)},
         "srvc_main": {"size": (730, 305)}
