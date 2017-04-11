@@ -55,12 +55,31 @@ class ServiceSections(models.Model):
         return self.title
 
 
+class FourServiceDirection(models.Model):
+    title = models.CharField('Название', max_length=40)
+    desc = models.TextField('Короткое описание', max_length=140)
+    img = models.ImageField('Изображение', upload_to='services/directions/', help_text='154x142px')
+
+    class Meta:
+        verbose_name = 'Тематика услуг'
+        verbose_name_plural = '4 направления услуг'
+        db_table = 'FourServiceDirection'
+
+    def get_images_fields(self):
+        return self.img,
+
+    def __unicode__(self):
+        return self.title
+
+
 # Регистрация callback-функций сигналов
 # TODO: мб упростить?
 pre_delete.connect(del_imgs__pre_delete, sender=Service)
 pre_save.connect(del_imgs__pre_save, sender=Service)
 pre_delete.connect(del_imgs__pre_delete, sender=ServiceSections)
 pre_save.connect(del_imgs__pre_save, sender=ServiceSections)
+pre_delete.connect(del_imgs__pre_delete, sender=FourServiceDirection)
+pre_save.connect(del_imgs__pre_save, sender=FourServiceDirection)
 
 
 
