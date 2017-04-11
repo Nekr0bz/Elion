@@ -1,5 +1,6 @@
 {% extends "main/main.html" %}
 {% load staticfiles %}
+{% load thumbnail %}
 {% block title %}Главная страница{% endblock %}
 {% block add_css %}
     <!-- owl-carousel css -->
@@ -9,7 +10,283 @@
 {% block body_class %}"home"{% endblock %}
 
 {% block content %}
-    ГЛАВНАЯ СТРАНИЦА
+<!-- ======= revolution slider section ======= -->
+<section class="rev_slider_wrapper me-fin-banner">
+    <div id="slider1" class="rev_slider"  data-version="5.0">
+        <ul>
+            <li data-transition="fade">
+                <img src="{% static 'vendors/img/1.jpg' %}"  alt="">
+                <div class="tp-caption sfb tp-resizeme banner-h1"
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="290"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="500">
+                    Выполняем работу всегда <br>на высоком уровне
+                </div>
+                <div class="tp-caption sfb tp-resizeme banner-border"
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="400"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="800">
+                    <span></span>
+                </div>
+                <div class="tp-caption sfb tp-resizeme banner-text"
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="435"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="1100">
+                    <p>Наши клиенты всегда довольны<br>качеством наших работ.</p>
+                </div>
+                <div class="tp-caption sfl tp-resizeme "
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="510"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="1400">
+                    <a class="banner-button" href="{% url 'submit_app' %}">Оставить заявку <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="tp-caption sfr tp-resizeme" style="margin-left: 50px"
+                    data-x="left" data-hoffset="580"
+                    data-y="top" data-voffset="510"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="1700">
+                    <a class="banner-button blue-bg" href="{% url 'services' %}">Наши Услуги <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </li>
+            <li data-transition="fade">
+                <img src="{% static 'vendors/img/2.jpg' %}"  alt="">
+                <div class="tp-caption sfb tp-resizeme banner-h1"
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="290"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="500">
+                    Мы всегда рады <br>помочь вам
+                </div>
+                <div class="tp-caption sfb tp-resizeme banner-border"
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="400"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="800">
+                    <span></span>
+                </div>
+                <div class="tp-caption sfb tp-resizeme banner-text"
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="435"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="1100">
+                    <p>Если у вас есть какие либо вопросы,<br>вы можете всегда связаться с нами.</p>
+                </div>
+                <div class="tp-caption sfb tp-resizeme "
+                    data-x="left" data-hoffset="380"
+                    data-y="top" data-voffset="510"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
+                    data-transform_in="o:0"
+                    data-transform_out="o:0"
+                    data-start="1400">
+                    <a class="banner-button" href="{% url 'contacts' %}">Контакты<i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- ======= /revolution slider section ======= -->
+
+
+<!-- ======= Welcome section ======= -->
+<section class="welcome_sec">
+    <div class="container">
+        <div class="row welcome_heading">
+            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+                <h2>Мы предлагаем <br>разные услуги</h2>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+                <p>{{ static_dates.description_services }}</p>
+            </div>
+        </div> <!-- End Row -->
+        <div class="row welcome welcome_details">
+            <div class="col-lg-6 col-md-12">
+
+            {% for service in services %}
+
+                {% if forloop.counter == 3 %}
+                </div>
+                <div class="col-lg-6 col-md-12 bottom_row">
+                {% endif %}
+
+                <div class="welcome_item {% cycle ' ' 'welcome_item_bottom' %}">
+                    <a href="{% url 'services' %}"><img src="{% thumbnail service.img 'four_srvc' %}" alt="images"></a>
+                    <div class="welcome_info">
+                        <h3>{{ service.title }}</h3>
+                        <p>{{ service.desc }}</p>
+                    </div>
+                </div>
+            {% endfor  %}
+            </div>
+        </div> <!-- End Row -->
+    </div> <!-- End container -->
+</section> <!-- End welcome_sec -->
+<!-- ======= /Welcome section ======= -->
+
+<!-- ======= Who We Are ======= -->
+<section class="we_are">
+    <div class="left_side float_left">
+        <div class="we_are_opacity">
+            <div class="we_are_border">
+                <h2>Мы работаем с {{ static_dates.year_company_opening }} года</h2>
+            </div>
+        </div>
+    </div> <!-- End Left_Side -->
+    <div class="right_side float_right">
+        <div class="we_are_deatails">
+            <h2>Кты мы?</h2>
+            <p>{{ static_dates.who_we_are1 }}<br>  <br>
+
+            {{ static_dates.who_we_are2 }}</p>
+            <div class="list_item">
+                <img src="{% static 'vendors/img/icon-1.png' %}" alt=""><p>Dedicated <br>Team</p>
+                <img src="{% static 'vendors/img/icon-2.png' %}" alt=""><p>Best <br>Advisors</p>
+                <img src="{% static 'vendors/img/icon-3.png' %}" alt=""><p class="support">24/7 <br>Supports</p>
+            </div>
+        </div>
+    </div> <!-- End right_side -->
+</section> <!-- End We Are -->
+<!-- ======= /Who We Are ======= -->
+
+
+
+<!-- ======== Latest News ======== -->
+<section class="p0 container-fluid latest_news_sec news_large" style="display: inline-block;">
+    <div class="container">
+        <h2>Последние новости компании</h2>
+    </div>
+    <div class="news_highlight">
+        {% for new in news %}
+        <div class="col-lg-3 col-md-6 news {% cycle '' 'news_right' 'news_bottom' 'news_right news_bottom' %}">
+            <div class="news_img_holder">
+                <img class="img-responsive" src="{% thumbnail new.img 'news_main' %}" alt="image">
+                <div class="news_opacity">
+                </div>
+                <div class="news_details">
+                    <a href="{{ new.get_absolute_url }}">
+                        <span>{{ new.datetime|date:"d.m.Y"}}</span>
+                        <h4>{{ new.title }}</h4>
+                        <p>{{ new.description|slice:"150" }} ...</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section> <!-- End latest_news_sec -->
+<!-- ======== /Latest News ======== -->
+
+<!-- ======= Testimonial & Company Values ======= -->
+<section class="testimonial_sec clear_fix">
+    <div class="container">
+        <div class="row">
+            <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12 testimonial_container">
+                <div class="sec-title">
+                    <h2>Наш персонал</h2>
+                </div>
+                <div id="owl">
+                    {% for employ in employees %}
+                    <div>
+                        <div class="testimonial">
+                            <img class="round_img" src="{% thumbnail employ.avatar "avatar" %}" alt="images">
+                            <div class="float_right client_info">
+                                <p>{{ employ.full_name }}</p>
+                                <span>{{ employ.position }}</span><br>
+                                <span>{{ employ.contact }}</span>
+                            </div>
+                        </div>
+                        <p class="john_speach">{{ employ.review }}</p>
+                    </div>
+                    {% endfor %}
+                </div> <!-- End owl -->
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 company">
+                <h2>Our Company Values</h2>
+                <div class="company-tab">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a data-toggle="pill" href="#menu1">Quality</a></li>
+                        <li><a data-toggle="pill" href="#menu2">Commitment</a></li>
+                        <li><a data-toggle="pill" href="#menu3">Success</a></li>
+                    </ul>
+
+                     <div class="tab-content">
+                        <div id="menu1" class="tab-pane fade in active">
+                          <h3>Our Company Quality</h3>
+                          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit sed quia non qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit. Red quia numquam eius modi. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
+                          <ul class="p0">
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
+                          </ul>
+                          <ul class="list-two">
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
+                          </ul>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                          <h3>Our Company Quality</h3>
+                          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit sed quia non qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit. Red quia numquam eius modi. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
+                          <ul class="p0">
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
+                          </ul>
+                          <ul class="list-two">
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
+                          </ul>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                          <h3>Our Company Quality</h3>
+                          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit sed quia non qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit. Red quia numquam eius modi. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
+                          <ul class="p0">
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
+                          </ul>
+                          <ul class="list-two">
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
+                          </ul>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div> <!-- End row -->
+    </div> <!-- End Container -->
+</section> <!-- testimonial -->
+<!-- ======= /Testimonial & Company Values ======= -->
 {% endblock %}
 
 {% block add_js %}

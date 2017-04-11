@@ -142,9 +142,13 @@ THUMBNAIL_ALIASES = {
         "section_srvc": {"size": (248, 199)},
         "section_desc": {"size": (151, 161)}
     },
+    "services.FourServiceDirection": {
+        "four_srvc": {"size": (154, 142)}
+    },
     "news.News": {
         "news_list": {"size": (548, 260)},
-        "news_detail": {"size": (1148, 360)}
+        "news_detail": {"size": (1148, 360)},
+        "news_main": {"size": (480, 341)},
     }
 }
 
