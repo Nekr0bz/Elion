@@ -1,0 +1,48 @@
+{% load thumbnail %}
+
+<section class="testimonial_sec clear_fix">
+    <div class="container">
+        <div class="row">
+            <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12 testimonial_container">
+                <div class="sec-title">
+                    <h2>Наш персонал</h2>
+                </div>
+                <div id="owl">
+                    {% for employ in employees %}
+                    <div>
+                        <div class="testimonial">
+                            <img class="round_img" src="{% thumbnail employ.avatar "avatar" %}" alt="images">
+                            <div class="float_right client_info">
+                                <p>{{ employ.full_name }}</p>
+                                <span>{{ employ.position }}</span><br>
+                                <span>{{ employ.contact }}</span>
+                            </div>
+                        </div>
+                        <p class="john_speach">{{ employ.review }}</p>
+                    </div>
+                    {% endfor %}
+                </div> <!-- End owl -->
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 company">
+                <h2>Ценности нашей компании</h2>
+                <div class="company-tab">
+                    <ul class="nav nav-pills nav-justified">
+                    {% for val in values_company %}
+                        <li{% if forloop.first %} class="active"{% endif %}>
+                            <a data-toggle="pill" href="#menu{{ val.id }}">{{ val.title_main }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                     <div class="tab-content">
+                     {% for val in values_company %}
+                        <div id="menu{{ val.id }}" class="tab-pane fade {% if forloop.first %} in active{% endif %}">
+                            <h3>{{ val.title_other }}</h3>
+                            <p>{{ val.text }}</p>
+                        </div>
+                     {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div> <!-- End row -->
+    </div> <!-- End Container -->
+</section> <!-- testimonial -->
