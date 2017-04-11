@@ -162,3 +162,8 @@ PHONENUMBER_DB_FORMAT = 'E164'
 CKEDITOR_JQUERY_URL = os.path.join(BASE_DIR, 'static/vendors/js/JQuery/jquery-3.1.1.min.js')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
+
+try:
+    from settings_local import *
+except ImportError:
+    print ("DEBUG")
