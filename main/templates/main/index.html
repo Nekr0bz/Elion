@@ -232,54 +232,19 @@
                 <h2>Our Company Values</h2>
                 <div class="company-tab">
                     <ul class="nav nav-pills nav-justified">
-                        <li class="active"><a data-toggle="pill" href="#menu1">Quality</a></li>
-                        <li><a data-toggle="pill" href="#menu2">Commitment</a></li>
-                        <li><a data-toggle="pill" href="#menu3">Success</a></li>
+                    {% for val in values_company %}
+                        <li{% if forloop.first %} class="active"{% endif %}>
+                            <a data-toggle="pill" href="#menu{{ val.id }}">{{ val.title_main }}</a>
+                        </li>
+                    {% endfor %}
                     </ul>
-
                      <div class="tab-content">
-                        <div id="menu1" class="tab-pane fade in active">
-                          <h3>Our Company Quality</h3>
-                          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit sed quia non qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit. Red quia numquam eius modi. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
-                          <ul class="p0">
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
-                          </ul>
-                          <ul class="list-two">
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
-                          </ul>
+                    {% for val in values_company %}
+                        <div id="menu{{ val.id }}" class="tab-pane fade {% if forloop.first %} in active{% endif %}">
+                            <h3>{{ val.title_other }}</h3>
+                            <p>{{ val.text }}</p>
                         </div>
-                        <div id="menu2" class="tab-pane fade">
-                          <h3>Our Company Quality</h3>
-                          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit sed quia non qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit. Red quia numquam eius modi. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
-                          <ul class="p0">
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
-                          </ul>
-                          <ul class="list-two">
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
-                          </ul>
-                        </div>
-                        <div id="menu3" class="tab-pane fade">
-                          <h3>Our Company Quality</h3>
-                          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit sed quia non qui dolorem ipsum quia dolor sit amet, consectetur, adipis civelit. Red quia numquam eius modi. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
-                          <ul class="p0">
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
-                          </ul>
-                          <ul class="list-two">
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Our Company Growth</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">1000 Employed</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="">Customer Relationship</a></li>
-                          </ul>
-                        </div>
+                     {% endfor %}
                      </div>
                 </div>
             </div>
