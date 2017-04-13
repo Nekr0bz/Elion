@@ -1,12 +1,12 @@
 {% extends "main/main.html" %}
-{% load staticfiles %}
+{% load remotestaticfiles %}
 {% load thumbnail %}
 {% load object_filter %}
 
 {% block title %}Услуги{% endblock %}
 
 {% block add_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'vendors/css/bootstrap.vertical-tabs.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% remote_static 'vendors/css/bootstrap.vertical-tabs.css' %}">
 {% endblock %}
 
 {% block body_class %}service2{% endblock %}

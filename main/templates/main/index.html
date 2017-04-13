@@ -1,11 +1,11 @@
 {% extends "main/main.html" %}
-{% load staticfiles %}
+{% load remotestaticfiles %}
 {% load thumbnail %}
 {% block title %}Главная страница{% endblock %}
 {% block add_css %}
     <!-- owl-carousel css -->
-    <link href="{% static 'vendors/css/owl.theme.css' %}" rel="stylesheet">
-    <link href="{% static 'vendors/css/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% remote_static 'vendors/css/owl.theme.css' %}" rel="stylesheet">
+    <link href="{% remote_static 'vendors/css/owl.carousel.css' %}" rel="stylesheet">
 {% endblock %}
 {% block body_class %}"home"{% endblock %}
 
@@ -15,7 +15,7 @@
     <div id="slider1" class="rev_slider"  data-version="5.0">
         <ul>
             <li data-transition="fade">
-                <img src="{% static 'vendors/img/1.jpg' %}"  alt="">
+                <img src="{% remote_static 'vendors/img/1.jpg' %}"  alt="">
                 <div class="tp-caption sfb tp-resizeme banner-h1"
                     data-x="left" data-hoffset="380"
                     data-y="top" data-voffset="290"
@@ -68,7 +68,7 @@
                 </div>
             </li>
             <li data-transition="fade">
-                <img src="{% static 'vendors/img/2.jpg' %}"  alt="">
+                <img src="{% remote_static 'vendors/img/2.jpg' %}"  alt="">
                 <div class="tp-caption sfb tp-resizeme banner-h1"
                     data-x="left" data-hoffset="380"
                     data-y="top" data-voffset="290"
@@ -166,9 +166,9 @@
             <p>{{ static_dates.who_we_are1 }}<br><br>
             {{ static_dates.who_we_are2 }}</p>
             <div class="list_item">
-                <img src="{% static 'vendors/img/icon-1.png' %}" alt=""><p style="margin-right: 10px">Надёжная <br>Команда</p>
-                <img src="{% static 'vendors/img/icon-2.png' %}" alt=""><p style="margin-right: 10px">Лучшие <br>Сотрудники</p>
-                <img src="{% static 'vendors/img/icon-3.png' %}" alt=""><p class="support">Поддержка <br>24/7</p>
+                <img src="{% remote_static 'vendors/img/icon-1.png' %}" alt=""><p style="margin-right: 10px">Надёжная <br>Команда</p>
+                <img src="{% remote_static 'vendors/img/icon-2.png' %}" alt=""><p style="margin-right: 10px">Лучшие <br>Сотрудники</p>
+                <img src="{% remote_static 'vendors/img/icon-3.png' %}" alt=""><p class="support">Поддержка <br>24/7</p>
             </div>
         </div>
     </div> <!-- End right_side -->
@@ -211,6 +211,6 @@
 
 {% block add_js %}
     <!-- owl-carousel -->
-    <script type="text/javascript" src="{% static 'vendors/js/owl.carousel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vendors/js/owl-custom.js' %}"></script>
+    <script type="text/javascript" src="{% remote_static 'vendors/js/owl.carousel.js' %}"></script>
+    <script type="text/javascript" src="{% remote_static 'vendors/js/owl-custom.js' %}"></script>
 {% endblock %}

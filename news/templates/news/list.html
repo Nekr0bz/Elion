@@ -1,5 +1,5 @@
 {% extends "main/main.html" %}
-{% load staticfiles %}
+{% load remotestaticfiles %}
 {% load thumbnail %}
 
 {% block title %}Новости{% endblock %}
@@ -36,5 +36,5 @@
 {% endblock %}
 
 {% block add_js %}
-    <script type="text/javascript" src="{% static 'vendors/js/jquery.mixitup.min.js' %}"></script>
+    <script type="text/javascript" src="{% remote_static 'vendors/js/jquery.mixitup.min.js' %}"></script>
 {% endblock %}

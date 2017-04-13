@@ -1,11 +1,11 @@
 {% extends "main/main.html" %}
-{% load staticfiles %}
+{% load remotestaticfiles %}
 {% load thumbnail %}
 
 {% block add_css %}
     <!-- owl-carousel css -->
-    <link href="{% static 'vendors/css/owl.carousel.css' %}" rel="stylesheet">
-    <link href="{% static 'vendors/css/owl.theme.css' %}" rel="stylesheet">
+    <link href="{% remote_static 'vendors/css/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% remote_static 'vendors/css/owl.theme.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block title %}О компании{% endblock %}
@@ -64,6 +64,6 @@
 {% endblock %}
 
 {% block add_js %}
-    <script type="text/javascript" src="{% static 'vendors/js/owl.carousel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vendors/js/owl-custom.js' %}"></script>
+    <script type="text/javascript" src="{% remote_static 'vendors/js/owl.carousel.js' %}"></script>
+    <script type="text/javascript" src="{% remote_static 'vendors/js/owl-custom.js' %}"></script>
 {% endblock %}

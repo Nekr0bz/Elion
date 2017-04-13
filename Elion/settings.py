@@ -21,7 +21,7 @@ SECRET_KEY = 'w*-f#h*y(g0lc+c3%elgef03hlz(#k^!yn8aa1h4p-&o!*!ugo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'nekr0bz.myjino.ru']
 
 
 # Application definition
@@ -159,7 +159,7 @@ PHONENUMBER_DB_FORMAT = 'E164'
 
 # Конфигурации wysiwyg-редактора
 
-CKEDITOR_JQUERY_URL = os.path.join(BASE_DIR, 'static/vendors/js/JQuery/jquery-3.1.1.min.js')
+CKEDITOR_JQUERY_URL = 'http://nekr0bz.myjino.ru/static/vendors/js/JQuery/jquery-3.1.1.min.js'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 

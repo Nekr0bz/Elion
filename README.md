@@ -8,12 +8,12 @@
 ```sh
 $ git clone https://github.com/Nekr0bz/Elion.git
 ```
-**Для работы проекта необходимо:** 
-1) Установить дополнительные модули, перечисленные в файле `requirements.txt`:
+**Настройка окружения** 
+
+Для работоспособности проекта необходимо установить дополнительные модули, перечисленные в файле `requirements.txt`:
 ```sh
 $ pip install -r requirements.txt
 ```
-2) Переместить содержимое директории [Elion-vendors](https://github.com/Nekr0bz/Elion-vendors) в папку проекта.
 ### База данных
 Создаем базу данных на SQLite:
 ```sh
@@ -28,7 +28,7 @@ $ python manage.py createsuperuser
 ```sh
 $ python manage.py runserver
 ```
-### Настройка
+### Дополнительная настройка
 Для работоспособности формы отправки сообщений на электронную почту, необходимо в файле `Elion/settings.py` 
 настроить SMTP бекенд, который установлен по умолчанию 
 ([см. документацию](https://docs.djangoproject.com/en/1.10/topics/email/#smtp-backend)).
