@@ -78,8 +78,9 @@ class SubmitApplication(forms.Form):
 
     def _generate_message(self):
         subject = 'Заявка от пользователя сайта'
-        region = AreasWork.objects.get(id=self.cleaned_data['region'])
-        service = Service.objects.get(id=self.cleaned_data['service'])
+
+        service = Service.objects.get(id=self.cleaned_data['service']) if int(self.cleaned_data['service']) else 'Другой'
+        region = AreasWork.objects.get(id=self.cleaned_data['region']) if int(self.cleaned_data['region']) else 'Другой'
 
         message = 'Имя: ' + self.cleaned_data['first_name'].encode('utf-8') + '\n'
         message += 'Фамилия: ' + self.cleaned_data['last_name'].encode('utf-8') + '\n'
