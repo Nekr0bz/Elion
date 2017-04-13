@@ -24,6 +24,8 @@ class SubmitAppView(FormView):
     template_name = "about/submit_app.html"
     form_class = SubmitApplication
     success_url = reverse_lazy('submit_app')
+    # TODO: автозаполнение формы если авторизован
+    # TODO: доработать "другое"
 
     def form_valid(self, form):
         form.send_email()

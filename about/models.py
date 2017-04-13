@@ -34,7 +34,7 @@ class StaticDates(models.Model):
     year_company_opening = models.IntegerField('Год открытия фирмы', choices=YEAR_CHOICES,
                                                default=datetime.datetime.now().year)
     history = models.TextField('История компании')
-    mission = models.TextField('Главная цель (миссия) компании')
+    mission = models.TextField('Специализация компании')
     mission_img = models.ImageField(upload_to='about/', help_text='470x167px',
                                     verbose_name='Главная цель (миссия) компании')
 
@@ -60,6 +60,10 @@ class FourValuesCompany(models.Model):
     number = models.IntegerField('Число')
     desc1 = models.CharField('Первая строка описания', max_length=20)
     desc2 = models.CharField('Вторая строка описания', max_length=20)
+
+    class Meta:
+        verbose_name = 'Важно число компании'
+        verbose_name_plural = 'Четыре важные цифры компании'
 
     def get_start_number(self):
         return 1 if self.number < 30 else 10

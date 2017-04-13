@@ -6,7 +6,7 @@ from Elion.settings import THUMBNAIL_ALIASES as th_options
 from .models import StaticDates, FourValuesCompany, AreasWork, Employees, ValuesCompany
 
 
-class FourValuesCompanyInline(admin.StackedInline):
+class FourValuesCompanyInline(admin.TabularInline):
     model = FourValuesCompany
     extra = 0
     fields = ('number', ('desc1', 'desc2'))

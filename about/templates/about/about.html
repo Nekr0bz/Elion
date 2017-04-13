@@ -13,7 +13,7 @@
 
 {% block content %}
 <!-- ======= Banner ======= -->
-{% include 'generic/banner.html' with this_section="Контакты"%}
+{% include 'generic/banner.html' with this_section="О компании"%}
 <!-- ================= /Banner ================ -->
 
 <!-- ============ Our history ========== -->
@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12 right_side">
                 <img class="img-responsive" src="{% thumbnail static_dates.mission_img "mission" %}" alt="image">
-                <h3>Cпециализация компании</h3>
+                <h3>Миссия компании</h3>
                 <p>{{ static_dates.mission }}</p>
             </div>
         </div>
@@ -39,7 +39,7 @@
     <div class="company_value_opacity">
         <div class="container">
             <div class="company_value_heading">
-                <div class="title-box" style="width: 284px">
+                <div class="title-box" style="width: 310px">
                     <h2>Гордость нашей <br>Компании</h2>
                 </div>
                 <div class="text-box">
@@ -49,7 +49,7 @@
             <div class="row value_fact">
             {% for value in static_dates.fourvaluescompany_set.all %}
                 <span class="timer" data-from="{{ value.get_start_number }}" data-to="{{ value.number }}" data-speed="5000" data-refresh-interval="50">{{ value.number }}</span>
-                <p>{{ value.desc1 }}<br>{{ value.desc2 }}</p>
+                <p {% if forloop.last %}class="case"{% endif %}>{{ value.desc1 }}<br>{{ value.desc2 }}</p>
             {% endfor %}
             </div>
         </div>
