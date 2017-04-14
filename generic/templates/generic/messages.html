@@ -1,6 +1,6 @@
 {% if messages %}
      {% for message in messages %}
-       <p>{{ message }}</p>
+       <p class="{{ message.tags }}">{{ message }}</p>
      {% endfor %}
  {% else %}
  <p>{{ default_text }}</p>
