@@ -27,7 +27,19 @@ class SubmitAppView(FormView):
     template_name = "about/submit_app.html"
     form_class = SubmitApplication
     success_url = reverse_lazy('submit_app')
-    # TODO: автозаполнение формы если авторизован
+
+    def get_initial(self):
+        if self.request.user.is_authenticated:
+            usr = self.request.user
+            initial_dates = {
+                'first_name':  usr.first_name,
+                'last_name':  usr.last_name,
+                'email':  usr.email,
+                'phone':  usr.phone_number,
+            }
+            return initial_dates
+        else:
+            return super(SubmitAppView, self).get_initial()
 
     def form_valid(self, form):
         form.send_email()
