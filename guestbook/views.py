@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+from django.http import JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.dates import ArchiveIndexView
 from django.views.generic.base import RedirectView
-from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 from .models import GuestBook
 from .forms import GuestBookForm
@@ -49,15 +49,32 @@ class GuestBookDeleteView(RedirectView):
         url = self.request.META.get('HTTP_REFERER', '/')
         return url
 
-    def get(self, request, *args, **kwargs):
-        guestbook = get_object_or_404(GuestBook, id=kwargs['guestbook_id'])
+    def post(self, request, *args, **kwargs):
+        if self.request.is_ajax():
+            try:
+                guestbook = GuestBook.objects.get(id=kwargs['guestbook_id'])
+                if guestbook.usr == request.user or request.user.has_perm('guestbook.delete_guestbook'):
+                    guestbook.delete()
+                    success_msg = 'Ваш отзыв успешно удалён!'
+                    messages.add_message(self.request, messages.SUCCESS, success_msg)
+                    data = {'status': 'ok'}
+                else:
+                    data = {
+                        'status': 'error',
+                        'code': 'PermissionDenied',
+                        'message': 'У пользователя нету прав на удаление этого объекта.'
+                    }
 
-        if guestbook.usr == request.user or request.user.has_perm('guestbook.delete_guestbook'):
-            guestbook.delete()
-            success_msg = 'Ваш отзыв успешно удалён!'
-            messages.add_message(self.request, messages.SUCCESS, success_msg)
+            except GuestBook.DoesNotExist:
+                data = {
+                    'status': 'error',
+                    'code': 'ObjectDoesNotExist',
+                    'message': 'Не правильный идентификатор объекта.'
+                }
+            return JsonResponse(data)
 
-        return super(GuestBookDeleteView, self).get(self, request, *args, **kwargs)
+        else:
+            return super(GuestBookDeleteView, self).get(self, request, *args, **kwargs)
 
 
 class GuestBookUpdateView(RedirectView):

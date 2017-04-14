@@ -47,7 +47,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             {% if user.id == object.usr.id or perms.guestbook.change_guestbook %}<li><a class="changeReview" data-objid="{{ object.id }}">Изменить</a></li>{% endif %}
-                            {% if user.id == object.usr.id or perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.id %}">Удалить</a></li>{% endif %}
+                            {% if user.id == object.usr.id or perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.id %}" data-action-del>Удалить</a></li>{% endif %}
                         </ul>
                     </div>
                 {% endif %}
@@ -85,7 +85,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 {% if perms.guestbook.change_guestbook %}<li><a class="changeReply" data-objid="{{ object.id }}">Изменить</a></li>{% endif %}
-                                {% if perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.guestbook.id %}">Удалить</a></li>{% endif %}
+                                {% if perms.guestbook.delete_guestbook %}<li><a href="{% url 'guestbook:delete' object.guestbook.id %}" data-action-del>Удалить</a></li>{% endif %}
                             </ul>
                         </div>
                     {% endif %}

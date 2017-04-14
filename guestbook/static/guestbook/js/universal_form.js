@@ -11,11 +11,28 @@
             $('a.changeReview').on('click', app.showChangeReview);
             $('a.changeReply').on('click', app.showChangeReply);
             $('button.cancel').on('click', app.returnChanges);
+            $('a[data-action-del]').on('click', app.deleteObject);
+        },
+
+        getCookie: function(name){
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
         },
 
         showReply: function (e) {
             app.returnChanges(e);
-            // TODO: ajax
+
             var obj_id = $(this).attr('data-objid'),
                 reply = $('div[id='+obj_id+']');
 
@@ -64,6 +81,32 @@
             $('div.form_universal.show').addClass('hide').removeClass('show');
             $('div.quote-box.hide').removeClass('hide');
             $('div.author-box.hide').removeClass('hide');
+        },
+
+        deleteObject: function (e) {
+            e.preventDefault();
+            var parent_div = $(this).parents('div')[1];
+
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'POST',
+                data: {csrfmiddlewaretoken: app.getCookie('csrftoken')}
+            }).done(function (data) {
+                if(data['status'] == 'ok'){
+                    if ($(parent_div).hasClass('quote-box')){
+                        $(parent_div).next('div').remove();
+                        if ($(parent_div).next('div').hasClass('author-box')){
+                            $(parent_div).next('div').remove();
+                        }
+                        $(parent_div).next('br').remove();
+                        $(parent_div).next('br').remove();
+                    }
+                    $(parent_div).remove();
+                }
+                else if (data['stats'] == 'error'){
+                    console.log(data)
+                }
+            });
         }
 
     };
