@@ -42,6 +42,9 @@ class SubmitAppView(FormView):
             return super(SubmitAppView, self).get_initial()
 
     def form_valid(self, form):
+        if self.request.user.phone_number != form.cleaned_data['phone']:
+            self.request.user.phone_number = form.cleaned_data['phone']
+            self.request.user.save()
         form.send_email()
         success_msg = 'Спасибо, что  оставили заявку. Мы перезвоним вам в ближайщее время!'
         messages.add_message(self.request, messages.SUCCESS, success_msg)
