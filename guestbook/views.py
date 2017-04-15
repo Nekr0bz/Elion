@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.http import JsonResponse
 from django.shortcuts import redirect, get_object_or_404
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic.dates import ArchiveIndexView
 from django.views.generic.base import RedirectView
 from django.contrib import messages
@@ -28,7 +29,7 @@ class GuestBookIndexView(ArchiveIndexView):
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            guestbook_id = kwargs.get('guestbook_id', None)
+            guestbook_id = request.POST.get('guestbook_id', None)
             parent_id = get_object_or_404(GuestBook, id=guestbook_id).id if guestbook_id else None
             form_data = {
                 'parent': parent_id,
@@ -38,9 +39,10 @@ class GuestBookIndexView(ArchiveIndexView):
             self.form = GuestBookForm(form_data)
             if self.form.is_valid():
                 self.form.save()
-                return redirect(self.request.META.get('HTTP_REFERER', '/'))
+                if not parent_id:
+                    return redirect(reverse_lazy('guestbook:index'))
 
-        return super(GuestBookIndexView, self).get(request, *args, **kwargs)
+        return self.get(request, *args, **kwargs)
 
 
 class GuestBookDeleteView(RedirectView):

@@ -39,8 +39,7 @@
                 reply = $('div[id='+obj_id+']');
 
             $(reply).find('textarea').attr('placeholder', 'Ответить на отзыв клиента');
-            $(reply).find('button.submit').html('Ответить').attr('id','showReply');
-            $(reply).find('form').attr('action','/guestbook/reply/'+obj_id+'/');
+            $(reply).find('button.submit').html('Ответить').attr('id','showReply').attr('data-action-reply', '');
 
             $(reply).removeClass('hide').addClass('show');
         },
@@ -121,11 +120,14 @@
 
         routeActions: function (e) {
             if($(this)[0].hasAttribute('data-action-upd')){
-                app.removeObject(e, this);
+                app.updateObject(e, this);
+            }
+            else if($(this)[0].hasAttribute('data-action-reply')){
+                app.createReply(e, this);
             }
         },
 
-        removeObject: function (e, _this) {
+        updateObject: function (e, _this) {
             e.preventDefault();
             $(_this).attr('disabled', '');
 
@@ -147,6 +149,23 @@
                 }
             }).always(function () {
                 $(_this).removeAttr('disabled');
+            });
+        },
+
+        createReply: function (e, _this) {
+            e.preventDefault();
+            $(_this).attr('disabled', '');
+
+            var form = $(_this).parent(),
+                id = $(form).parent().attr('id'),
+                data = 'guestbook_id='+id+'&'+form.serialize();
+
+            $.pjax.reload('section.contact_us_container', {
+                type: 'POST',
+                data: data,
+                fragment:'section.contact_us_container'
+            }).complete(function () {
+                app.initialize();
             });
         }
     };
