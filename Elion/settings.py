@@ -162,6 +162,25 @@ PHONENUMBER_DB_FORMAT = 'E164'
 CKEDITOR_JQUERY_URL = 'http://nekr0bz.myjino.ru/static/vendors/js/JQuery/jquery-3.1.1.min.js'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono-lisa',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_Full': [
+            ['Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'HorizontalRule'],
+            ['TextColor', 'BGColor'],
+        ],
+        'toolbar': 'Full',
+        'height': 500,
+        'width': 1000,
+        'filebrowserWindowWidth': 940,
+        'filebrowserWindowHeight': 725,
+    }
+}
 
 try:
     from settings_local import *
