@@ -10,7 +10,7 @@
             $('.showReply').on('click', app.showReply);
             $('a.changeReview').on('click', app.showChangeReview);
             $('a.changeReply').on('click', app.showChangeReply);
-            $('button.cancel').on('click', app.returnChanges);
+            $('button.cancel').on('click', app.hideUniversalForm);
             $('a[data-action-del]').on('click', app.deleteObject);
             $('button.btn-review.submit').on('click', app.routeActions);
         },
@@ -32,6 +32,7 @@
         },
 
         showReply: function (e) {
+            e.preventDefault();
             app.returnChanges(e);
 
             var obj_id = $(this).attr('data-objid'),
@@ -45,6 +46,7 @@
         },
 
         showChangeReview: function (e) {
+            e.preventDefault();
             app.returnChanges(e);
 
             var obj_id = $(this).attr('data-objid'),
@@ -61,6 +63,7 @@
         },
 
         showChangeReply: function (e) {
+            e.preventDefault();
             app.returnChanges(e);
 
             var obj_id = $(this).attr('data-objid'),
@@ -77,8 +80,12 @@
             $(new_reply).removeClass('hide').addClass('show');
         },
 
-        returnChanges: function (e) {
+        hideUniversalForm: function (e) {
             e.preventDefault();
+            app.returnChanges();
+        },
+
+        returnChanges: function () {
             $('div.form_universal.show').addClass('hide').removeClass('show');
             $('div.quote-box.hide').removeClass('hide');
             $('div.author-box.hide').removeClass('hide');
@@ -142,7 +149,6 @@
                 $(_this).removeAttr('disabled');
             });
         }
-
     };
 
     app.initialize();
