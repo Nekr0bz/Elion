@@ -52,7 +52,7 @@
                     </div>
                 {% endif %}
                 <!-- End three dots menu -->
-                <div class="quote-content dtc" >
+                <div class="quote-content dtc" data-main-id="{{ object.id }}">
                     <p style="margin-bottom: 3px; padding-top: 18px; font-style: normal">{{ object.text }}</p>
                     <span class="name">- {{ object.usr.get_full_name }}</span>
                     {% if perms.guestbook.change_guestbook and not object.guestbook %}
@@ -90,7 +90,7 @@
                         </div>
                     {% endif %}
                     <!-- End three dots menu -->
-                    <div class="top-author-info dt" style="padding-left: 0">
+                    <div class="top-author-info dt" data-main-id="{{ object.guestbook.id }}" style="padding-left: 0">
                         <div class="top-author-info-content dtc">
                             <h4>администратор <span>({{ object.guestbook.usr.get_full_name }})</span></h4>
                             <p style="color: #fff; font-style: normal; padding-top: 0">{{ object.guestbook.text }}</p>

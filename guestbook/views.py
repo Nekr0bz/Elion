@@ -84,11 +84,28 @@ class GuestBookUpdateView(RedirectView):
         return url
 
     def post(self, request, *args, **kwargs):
-        guestbook = get_object_or_404(GuestBook, id=kwargs['guestbook_id'])
+        if self.request.is_ajax():
+            try:
+                guestbook = GuestBook.objects.get(id=kwargs['guestbook_id'])
+                if guestbook.usr == request.user or request.user.has_perm('guestbook.change_guestbook'):
+                    guestbook.text = request.POST['text'].encode('utf-8')
+                    guestbook.save()
+                    data = {'status': 'ok'}
+                else:
+                    data = {
+                        'status': 'error',
+                        'code': 'PermissionDenied',
+                        'message': 'У пользователя нету прав на изменение этого объекта.'
+                    }
 
-        if guestbook.usr == request.user or request.user.has_perm('guestbook.change_guestbook'):
-            guestbook.text = request.POST['text'].encode('utf-8')
-            guestbook.save()
+            except GuestBook.DoesNotExist:
+                data = {
+                    'status': 'error',
+                    'code': 'ObjectDoesNotExist',
+                    'message': 'Не правильный идентификатор объекта.'
+                }
+            return JsonResponse(data)
 
-        return super(GuestBookUpdateView, self).post(self, request, *args, **kwargs)
+        else:
+            return super(GuestBookUpdateView, self).get(self, request, *args, **kwargs)
 

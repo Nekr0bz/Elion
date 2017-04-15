@@ -12,6 +12,7 @@
             $('a.changeReply').on('click', app.showChangeReply);
             $('button.cancel').on('click', app.returnChanges);
             $('a[data-action-del]').on('click', app.deleteObject);
+            $('button.btn-review.submit').on('click', app.routeActions);
         },
 
         getCookie: function(name){
@@ -53,8 +54,8 @@
 
             $(this_review).addClass('hide');
             $(new_review).find('textarea').html(obj_text);
-            $(new_review).find('button.submit').html('Сохранить').attr('id','showChangeReview');
-            $(new_review).find('form').attr('action','/guestbook/update/'+obj_id+'/');
+            $(new_review).find('button.submit').html('Сохранить').attr('id','showChangeReview').attr('data-action-upd','');
+            $(new_review).find('form').attr('action','/guestbook/update/'+obj_id+'/').attr('data-target-upd', obj_id);;
 
             $(new_review).removeClass('hide').addClass('show');
         },
@@ -70,8 +71,8 @@
 
             $(this_reply).addClass('hide');
             $(new_reply).find('textarea').html(obj_text).attr('placeholder', 'Ответить на отзыв клиента');
-            $(new_reply).find('button.submit').html('Сохранить').attr('id','showChangeReply');
-            $(new_reply).find('form').attr('action','/guestbook/update/'+parent_id+'/');
+            $(new_reply).find('button.submit').html('Сохранить').attr('id','showChangeReply').attr('data-action-upd','');
+            $(new_reply).find('form').attr('action','/guestbook/update/'+parent_id+'/').attr('data-target-upd', parent_id);
 
             $(new_reply).removeClass('hide').addClass('show');
         },
@@ -81,6 +82,7 @@
             $('div.form_universal.show').addClass('hide').removeClass('show');
             $('div.quote-box.hide').removeClass('hide');
             $('div.author-box.hide').removeClass('hide');
+            $('button[data-action-upd]').removeAttr('data-action-upd');
         },
 
         deleteObject: function (e) {
@@ -105,6 +107,33 @@
                 }
                 else if (data['stats'] == 'error'){
                     console.log(data)
+                }
+            });
+        },
+
+        routeActions: function (e) {
+            if($(this)[0].hasAttribute('data-action-upd')){
+                app.removeObject(e, this);
+            }
+        },
+
+        removeObject: function (e, _this) {
+            e.preventDefault();
+            var form = $(_this).parent();
+
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize()
+            }).done(function (data) {
+                if(data['status'] == 'ok'){
+                    var id = $(form).attr('data-target-upd'),
+                        text = $(form).find('textarea').val();
+                    $('div[data-main-id='+id+']').find('p').html(text);
+                    app.returnChanges(e);
+                }
+                else if (data['stats'] == 'error'){
+                    console.log(data);
                 }
             });
         }
