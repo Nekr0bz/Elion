@@ -87,6 +87,7 @@
 
         deleteObject: function (e) {
             e.preventDefault();
+            $(this).addClass('disabled');
             var parent_div = $(this).parents('div')[1];
 
             $.ajax({
@@ -119,6 +120,8 @@
 
         removeObject: function (e, _this) {
             e.preventDefault();
+            $(_this).attr('disabled', '');
+
             var form = $(_this).parent();
 
             $.ajax({
@@ -135,6 +138,8 @@
                 else if (data['stats'] == 'error'){
                     console.log(data);
                 }
+            }).always(function () {
+                $(_this).removeAttr('disabled');
             });
         }
 
