@@ -82,10 +82,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
 
+class UserProfileManager(models.Manager):
+    def create_profile(self, user):
+        salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
+        activation_key = hashlib.sha1(salt+user.email).hexdigest()
+        key_expires = timezone.now() + datetime.timedelta(2)
+        return self.model(user=user, activation_key=activation_key, key_expires=key_expires).save()
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     activation_key = models.CharField(max_length=40, blank=True)
     key_expires = models.DateTimeField()
+
+    objects = UserProfileManager()
 
     class Meta:
         db_table = 'User_Profile'
