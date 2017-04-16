@@ -2,8 +2,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import ugettext_lazy as _
-
-from .models import User
+from .models import User, UserProfile
 
 
 class UserCreationForm(forms.ModelForm):
@@ -126,3 +125,11 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("email", "first_name", "last_name")
+
+    def save(self, commit=True):
+        user = super(SignUpForm, self).save(commit=False)
+        user.is_active = False
+        if commit:
+            user.save()
+            UserProfile.objects.create_profile(user)
+        return user

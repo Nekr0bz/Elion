@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 from phonenumber_field.modelfields import PhoneNumberField
+from Elion import settings
 import hashlib, datetime, random
 
 
@@ -101,6 +105,17 @@ class UserProfile(models.Model):
         db_table = 'User_Profile'
         verbose_name = 'Профиль пользователя'
         verbose_name_plural = 'Профили пользователей'
+
+    def send_activate_email(self):
+        user = self.user
+        key = self.activation_key
+        host = "127.0.0.1:8000" if settings.DEBUG else settings.ALLOWED_HOSTS[-1]
+        url = "http://"+host+reverse('accounts:confirm', kwargs={'activation_key': key})
+        subject = 'Подтверждение регистрации'
+        message = "Здравствуйте " + user.get_full_name()
+        message += ", спасибо за регистрацию на нашем сайте.<br>Для активации вашего аккаунта, "
+        message += "перейдите по ссылке:<br> "+url
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
 
     def __unicode__(self):
         return self.user.get_full_name()

@@ -14,7 +14,6 @@ class ContactMessageForm(forms.Form):
         'placeholder': 'Ваше Имя',
         'class': 'form-control name'
     }))
-    # TODO: проверка правельности email
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'placeholder': 'Ваш Email',
         'class': 'form-control email'

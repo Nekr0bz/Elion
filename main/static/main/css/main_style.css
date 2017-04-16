@@ -10,3 +10,7 @@ a.disabled {
     pointer-events: none;
     cursor: default;
 }
+
+p.success{
+    color: #60ca2c;;
+}
