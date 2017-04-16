@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
+import hashlib, datetime, random
 
 
 class UserManager(BaseUserManager):
@@ -79,3 +80,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    activation_key = models.CharField(max_length=40, blank=True)
+    key_expires = models.DateTimeField()
+
+    class Meta:
+        db_table = 'User_Profile'
+        verbose_name = 'Профиль пользователя'
+        verbose_name_plural = 'Профили пользователей'
+
+    def __unicode__(self):
+        return self.user.get_full_name()
