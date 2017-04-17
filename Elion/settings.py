@@ -169,14 +169,13 @@ CKEDITOR_CONFIGS = {
             ['Source', '-', 'Bold', 'Italic']
         ],
         'toolbar_Full': [
-            ['Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'HorizontalRule'],
-            ['TextColor', 'BGColor'],
+            ['Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker'], ['Undo', 'Redo'],
+            ['Blockquote', 'HorizontalRule'], ['Link', 'Unlink'], ['Outdent', 'Indent'],
+            ['Image', 'TextColor', 'BGColor'], ['Maximize'],
         ],
         'toolbar': 'Full',
         'height': 500,
-        'width': 1000,
+        'width': 1010,
         'filebrowserWindowWidth': 940,
         'filebrowserWindowHeight': 725,
     }
