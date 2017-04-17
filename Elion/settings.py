@@ -3,7 +3,7 @@
 import os
 
 try:
-    from private_settings import *
+    from .private_settings import *
 except ImportError:
     msg = 'Конфигурации для SMTP скрыты.'
     print (msg)
@@ -182,6 +182,6 @@ CKEDITOR_CONFIGS = {
 }
 
 try:
-    from settings_local import *
+    from .settings_local import *
 except ImportError:
     print ("DEBUG")
