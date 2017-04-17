@@ -88,8 +88,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class UserProfileManager(models.Manager):
     def create_profile(self, user):
-        salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-        activation_key = hashlib.sha1(salt+user.email).hexdigest()
+        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]
+        activation_key = hashlib.sha1(str(salt+user.email).encode('utf-8')).hexdigest()
         key_expires = timezone.now() + datetime.timedelta(2)
         return self.model(user=user, activation_key=activation_key, key_expires=key_expires).save()
 
