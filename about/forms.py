@@ -40,8 +40,10 @@ class ContactMessageForm(forms.Form):
 
 
 class SubmitApplication(forms.Form):
-    choice_region = [(None, 'Выберите город')] + AreasWork.objects.get_list_dates() + [('0', 'Другой')]
-    choice_service = [(None, 'Выберите интересующую услугу')] + Service.objects.get_list_dates() + [('0', 'Другая')]
+    regions = [(obj.id, obj.region) for obj in AreasWork.objects.all()]
+    services = [(obj.id, obj.title) for obj in Service.objects.all()]
+    choice_region = [(None, 'Выберите город')] + regions + [('0', 'Другой')]
+    choice_service = [(None, 'Выберите интересующую услугу')] + services + [('0', 'Другая')]
 
     first_name = forms.CharField(max_length=35, label='Выше Имя',
                                  widget=forms.TextInput(attrs={

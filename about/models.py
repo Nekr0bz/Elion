@@ -7,15 +7,8 @@ from generic.signals import del_imgs__pre_delete, del_imgs__pre_save
 import datetime
 
 
-class AreasWorkManager(models.Manager):
-    def get_list_dates(self):
-        return [(obj.id, obj.region) for obj in self.all()]
-
-
 class AreasWork(models.Model):
     region = models.CharField(verbose_name='Регион', max_length=30)
-
-    objects = AreasWorkManager()
 
     class Meta:
         db_table = 'AreasWork'
