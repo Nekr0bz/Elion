@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 from services.models import Service
-from generic.forms import ModelAndOtherLabelChoiceField
+from generic.forms import ModelAndOtherLabelsChoiceField
 from Elion import settings
 from .models import AreasWork
 
@@ -40,6 +40,8 @@ class ContactMessageForm(forms.Form):
 
 
 class SubmitApplication(forms.Form):
+    other_region = {'0': 'Другая область'}
+    other_service = {'0': 'Другая услгуа'}
     first_name = forms.CharField(max_length=35, label='Выше Имя',
                                  widget=forms.TextInput(attrs={
                                     'placeholder': 'Ваше Имя',
@@ -56,12 +58,12 @@ class SubmitApplication(forms.Form):
                              widget=forms.EmailInput(attrs={
                                     'placeholder': 'Ваш Email',
                                     'class': 'form-control email'}))
-    service = ModelAndOtherLabelChoiceField(queryset=Service.objects.all(), to_field_name='id', other_label='Другая услуга',
-                                            label='Услуга', empty_label='Выберите интересующую услугу',
+    service = ModelAndOtherLabelsChoiceField(queryset=Service.objects.all(), label='Услуга', to_field_name='id',
+                                             other_labels=other_service, empty_label='Выберите интересующую услугу',
+                                             widget=forms.Select(attrs={'class': 'form-control'}))
+    region = ModelAndOtherLabelsChoiceField(queryset=AreasWork.objects.all(), label='Область', to_field_name='id',
+                                            other_labels=other_region, empty_label='Выберите город',
                                             widget=forms.Select(attrs={'class': 'form-control'}))
-    region = ModelAndOtherLabelChoiceField(queryset=AreasWork.objects.all(), label='Область', to_field_name='id',
-                                           other_label='Другая область', empty_label='Выберите город',
-                                           widget=forms.Select(attrs={'class': 'form-control'}))
     address = forms.CharField(label='Полный адрес',
                               widget=forms.TextInput(attrs={
                                     'placeholder': 'Полный адрес (улица, дом, квартира)',
@@ -75,8 +77,10 @@ class SubmitApplication(forms.Form):
     def _generate_message(self):
         subject = 'Заявка от пользователя сайта'
 
-        service = self.cleaned_data['service'] if self.cleaned_data['service'] != '0' else 'Другой'
-        region = self.cleaned_data['region'] if self.cleaned_data['region'] != '0' else 'Другой'
+        form_service = self.cleaned_data['service']
+        form_region = self.cleaned_data['region']
+        service = form_service if form_service not in self.other_service.keys() else self.other_service[form_service]
+        region = form_region if form_region not in self.other_region.keys() else self.other_region[form_region]
 
         message = 'Имя: ' + self.cleaned_data['first_name'].encode('utf-8') + '\n'
         message += 'Фамилия: ' + self.cleaned_data['last_name'].encode('utf-8') + '\n'

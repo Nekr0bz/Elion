@@ -2,36 +2,37 @@
 from django.forms import models
 
 
-class ModelAndOtherLabelChoiceIterator(models.ModelChoiceIterator):
+class ModelAndOtherLabelsChoiceIterator(models.ModelChoiceIterator):
     def __iter__(self):
-        for i in super(ModelAndOtherLabelChoiceIterator, self).__iter__():
+        for i in super(ModelAndOtherLabelsChoiceIterator, self).__iter__():
             yield i
 
-        if self.field.other_label is not None:
-            yield (self.field.other_val, self.field.other_label)
+        if self.field.other_labels is not None:
+            for key in self.field.other_labels:
+                yield (key, self.field.other_labels[key])
 
     def __len__(self):
-        length = super(ModelAndOtherLabelChoiceIterator, self).__len__()
-        return length + (1 if self.field.last_label is not None else 0)
+        length = super(ModelAndOtherLabelsChoiceIterator, self).__len__()
+        len_others = len(self.field.other_labels) if self.field.other_labels is not None else 0
+        return length + len_others
 
 
-class ModelAndOtherLabelChoiceField(models.ModelChoiceField):
-    """Расширяет класс ModelChoiceField добавляя произвольное значение в choices"""
-    def __init__(self, queryset, other_label='Other', other_val='0', *args, **kwargs):
-        self.other_label = other_label
-        self.other_val = other_val
-        super(ModelAndOtherLabelChoiceField, self).__init__(queryset, *args, **kwargs)
+class ModelAndOtherLabelsChoiceField(models.ModelChoiceField):
+    """Расширяет класс ModelChoiceField добавляя словарь с произвольными значениями в choices"""
+    def __init__(self, queryset, other_labels, *args, **kwargs):
+        self.other_labels = other_labels
+        super(ModelAndOtherLabelsChoiceField, self).__init__(queryset, *args, **kwargs)
 
     def _get_choices(self):
         """Функция переопределена, чтобы использовалось ExtModelChoiceIterator"""
         if hasattr(self, '_choices'):
             return self._choices
-        return ModelAndOtherLabelChoiceIterator(self)
+        return ModelAndOtherLabelsChoiceIterator(self)
 
     choices = property(_get_choices, models.ChoiceField._set_choices)
 
     def to_python(self, value):
-        if value == self.other_val:
+        if self.other_labels and value in self.other_labels.keys():
             return value
         else:
-            return super(ModelAndOtherLabelChoiceField, self).to_python(value)
+            return super(ModelAndOtherLabelsChoiceField, self).to_python(value)
