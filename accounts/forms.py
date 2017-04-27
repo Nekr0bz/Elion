@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth import forms as auth_forms
+from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
+from Elion.settings import HIDE_PERMS_MODELS
 from .models import User, UserProfile
 
 
@@ -58,7 +60,9 @@ class UserChangeForm(forms.ModelForm):
         super(UserChangeForm, self).__init__(*args, **kwargs)
         f = self.fields.get('user_permissions')
         if f is not None:
-            f.queryset = f.queryset.select_related('content_type')
+            all_perms = f.queryset.select_related('content_type')
+            hide_perms = list(ContentType.objects.filter(model__in=HIDE_PERMS_MODELS))
+            f.queryset = all_perms.exclude(content_type__in=hide_perms)
 
     def clean_password(self):
         return self.initial["password"]

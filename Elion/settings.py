@@ -181,6 +181,12 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# Модели, чьи права не должны назначаться персоналу
+HIDE_PERMS_MODELS = [
+    'permission', 'group', 'contenttype', 'session', 'source',
+    'thumbnail', 'thumbnaildimensions', 'user', 'userprofile'
+]
+
 try:
     from .settings_local import *
 except ImportError:
