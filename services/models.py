@@ -23,7 +23,7 @@ class Service(models.Model):
         return self.title
 
 
-class ServiceSections(models.Model):
+class ServiceSubsections(models.Model):
     SUB_SERVICE = (1, 'Дополнительная услуга')
     EXT_DESCRIPTION = (2, 'Дополнительное описание')
     TYPE_CHOICES = (SUB_SERVICE, EXT_DESCRIPTION)
@@ -32,13 +32,13 @@ class ServiceSections(models.Model):
     title = models.CharField(max_length=50, unique=True, verbose_name='Заголовок')
     content = RichTextField(verbose_name='Описание')
     type = models.IntegerField(choices=TYPE_CHOICES, verbose_name='Тип раздела', default=SUB_SERVICE)
-    img = models.ImageField(upload_to='services/sections/', verbose_name='Изображение',
+    img = models.ImageField(upload_to='services/subsections/', verbose_name='Изображение',
                             help_text='Доп. услуга: 248х199px.\nДоп. описание: 151х161px.')
 
     class Meta:
         verbose_name = 'Дополнительный раздел'
         verbose_name_plural = 'Дополнительные разделы'
-        db_table = 'Service_Sections'
+        db_table = 'Service_Subsections'
         ordering = ['type']
 
     def get_images_fields(self):
@@ -69,8 +69,8 @@ class FourServiceDirection(models.Model):
 # TODO: мб упростить?
 pre_delete.connect(del_imgs__pre_delete, sender=Service)
 pre_save.connect(del_imgs__pre_save, sender=Service)
-pre_delete.connect(del_imgs__pre_delete, sender=ServiceSections)
-pre_save.connect(del_imgs__pre_save, sender=ServiceSections)
+pre_delete.connect(del_imgs__pre_delete, sender=ServiceSubsections)
+pre_save.connect(del_imgs__pre_save, sender=ServiceSubsections)
 pre_delete.connect(del_imgs__pre_delete, sender=FourServiceDirection)
 pre_save.connect(del_imgs__pre_save, sender=FourServiceDirection)
 

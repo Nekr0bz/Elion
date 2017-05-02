@@ -3,12 +3,12 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from easy_thumbnails.files import get_thumbnailer
 
-from .models import Service, ServiceSections, FourServiceDirection
+from .models import Service, ServiceSubsections, FourServiceDirection
 from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 
 class SectionsInline(admin.StackedInline):
-    model = ServiceSections
+    model = ServiceSubsections
     extra = 0
     readonly_fields = ('thumb_img',)
     fields = ('type', 'title', 'content', ('thumb_img', 'img'))
