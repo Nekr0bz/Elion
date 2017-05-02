@@ -24,7 +24,7 @@ class Service(models.Model):
 
 
 class ServiceSubsections(models.Model):
-    SUB_SERVICE = (1, 'Дополнительная услуга')
+    SUB_SERVICE = (1, 'Дополнительный подраздел')
     EXT_DESCRIPTION = (2, 'Дополнительное описание')
     TYPE_CHOICES = (SUB_SERVICE, EXT_DESCRIPTION)
 
@@ -36,8 +36,8 @@ class ServiceSubsections(models.Model):
                             help_text='Доп. услуга: 248х199px.\nДоп. описание: 151х161px.')
 
     class Meta:
-        verbose_name = 'Дополнительный раздел'
-        verbose_name_plural = 'Дополнительные разделы'
+        verbose_name = 'Дополнительный подраздел'
+        verbose_name_plural = 'Дополнительные подразделы'
         db_table = 'Service_Subsections'
         ordering = ['type']
 
