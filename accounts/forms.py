@@ -4,7 +4,7 @@ from django.contrib.auth import forms as auth_forms
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
 from Elion.settings import HIDE_PERMS_MODELS
-from .models import User, UserProfile
+from .models import User, UserAuthData
 
 
 class UserCreationForm(forms.ModelForm):
@@ -135,5 +135,5 @@ class SignUpForm(UserCreationForm):
         user.is_active = False
         if commit:
             user.save()
-            UserProfile.objects.create_profile(user)
+            UserAuthData.objects.create_profile(user)
         return user

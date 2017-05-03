@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect, get_object_or_404
 from generic.mixins import NextPageMixin
 from .forms import SignInForm, SignUpForm
-from .models import UserProfile
+from .models import UserAuthData
 
 
 class LoginView(NextPageMixin, FormView):
@@ -48,7 +48,7 @@ class RegisterView(FormView):
 
     def form_valid(self, form):
         user = form.save()
-        user.userprofile.send_activate_email()
+        user.userauthdata.send_activate_email()
         success_msg = 'На ваш email отправлено письмо для активации аккаунта!'
         messages.add_message(self.request, messages.SUCCESS, success_msg)
         return super(RegisterView, self).form_valid(form)
@@ -71,8 +71,8 @@ class ConfirmView(RedirectView):
         if request.user.is_authenticated():
             return redirect(reverse_lazy('main'))
 
-        user = get_object_or_404(UserProfile, activation_key=kwargs['activation_key']).user
-        if user.userprofile.key_expires > timezone.now():
+        user = get_object_or_404(UserAuthData, activation_key=kwargs['activation_key']).user
+        if user.userauthdata.key_expires > timezone.now():
             user.is_active = True
             user.save()
             success_msg = 'Вы успешно зарегистрировались! Для того чтобы зайти на сайт, заполните форму ниже.'

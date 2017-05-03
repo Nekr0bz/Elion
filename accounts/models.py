@@ -86,7 +86,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
 
-class UserProfileManager(models.Manager):
+class UserAuthDataManager(models.Manager):
     def create_profile(self, user):
         salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]
         activation_key = hashlib.sha1(str(salt+user.email).encode('utf-8')).hexdigest()
@@ -94,17 +94,17 @@ class UserProfileManager(models.Manager):
         return self.model(user=user, activation_key=activation_key, key_expires=key_expires).save()
 
 
-class UserProfile(models.Model):
+class UserAuthData(models.Model):
     user = models.OneToOneField(User)
     activation_key = models.CharField(max_length=40, blank=True)
     key_expires = models.DateTimeField()
 
-    objects = UserProfileManager()
+    objects = UserAuthDataManager()
 
     class Meta:
-        db_table = 'User_Profile'
-        verbose_name = 'Профиль пользователя'
-        verbose_name_plural = 'Профили пользователей'
+        db_table = 'User_AuthData'
+        verbose_name = 'Данные активации аккаунта'
+        verbose_name_plural = 'Данные активации аккаунтов'
 
     def send_activate_email(self):
         user = self.user
