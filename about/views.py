@@ -3,7 +3,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
-from .forms import ContactMessageForm, SubmitApplication
+from .forms import ContactMessageForm, SubmitAppForm
 from .models import ValuesCompany, Employees, StaticDates
 
 
@@ -25,7 +25,7 @@ class ContactView(FormView):
 
 class SubmitAppView(FormView):
     template_name = "about/submit_app.html"
-    form_class = SubmitApplication
+    form_class = SubmitAppForm
     success_url = reverse_lazy('submit_app')
 
     def get_initial(self):

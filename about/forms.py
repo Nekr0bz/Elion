@@ -39,7 +39,7 @@ class ContactMessageForm(forms.Form):
         send_mail(subject, message, settings.EMAIL_HOST_USER, ['nekr0b@yandex.ru'])
 
 
-class SubmitApplication(forms.Form):
+class SubmitAppForm(forms.Form):
     other_region = {'0': 'Другая область'}
     other_service = {'0': 'Другая услгуа'}
     first_name = forms.CharField(max_length=35, label='Выше Имя',
