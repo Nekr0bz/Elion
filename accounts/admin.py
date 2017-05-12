@@ -9,7 +9,7 @@ admin.site.unregister(Group)
 
 
 @admin.register(User)
-class MyUserAdmin(UserAdmin):
+class ExtUserAdmin(UserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     list_display = ('email', 'first_name', 'last_name', 'phone_number', 'is_staff')
