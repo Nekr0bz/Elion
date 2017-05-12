@@ -12,7 +12,14 @@ import hashlib, datetime, random
 
 
 class UserManager(BaseUserManager):
+    """
+    Менеджер для управления моделью пользователей
+    """
     def _create_user(self, email, password, **extra_fields):
+        """
+        Создание пользователя
+        :return: экземпляр модели пользователя
+        """
         if not email:
             raise ValueError('Email должен быть указан')
         user = self.model(email=self.normalize_email(email), **extra_fields)
@@ -21,11 +28,19 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email=None, password=None, **extra_fields):
+        """
+        Установка параметров при создании обычного пользователя
+        :return: экземпляр модели пользователя
+        """
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
+        """
+        Установка параметров при создании flvbybcnhfnjhf
+        :return: экземпляр модели пользователя
+        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -38,6 +53,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Модель пользователей
+    """
     email = models.EmailField(
         _('email address'),
         max_length=255,
@@ -80,15 +98,32 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_table = 'Users'
 
     def get_full_name(self):
+        """
+        Получение полного имя пользователя
+        :return: имя и фамилия пользователя
+        """
         full_name = '%s %s' % (self.first_name, self.last_name) if self.first_name and self.last_name else self.email
         return full_name.strip()
 
     def get_short_name(self):
+        """
+        Получение сокращённого имени пользователя
+        :return: имя пользователя
+        """
         return self.first_name
 
 
 class UserAuthDataManager(models.Manager):
+    """
+    Менеджер для управления моделью отвечащая за активацию аккаунтов
+    """
     def create_profile(self, user):
+        """
+        Создание модели для активации аккаунта
+        :param user: экземпляр модели пользователя
+        :type user: User
+        :return: экземпляр модели для активации аккаунта
+        """
         salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]
         activation_key = hashlib.sha1(str(salt+user.email).encode('utf-8')).hexdigest()
         key_expires = timezone.now() + datetime.timedelta(2)
@@ -96,6 +131,9 @@ class UserAuthDataManager(models.Manager):
 
 
 class UserAuthData(models.Model):
+    """
+    Модель отвечащая за активацию аккаунтов
+    """
     user = models.OneToOneField(User)
     activation_key = models.CharField(max_length=40, blank=True)
     key_expires = models.DateTimeField()
@@ -108,6 +146,9 @@ class UserAuthData(models.Model):
         verbose_name_plural = 'Данные активации аккаунтов'
 
     def send_activate_email(self):
+        """
+        Отправка сообщения для активации аккаунта пользователю на email
+        """
         user = self.user
         key = self.activation_key
         host = "127.0.0.1:8000" if settings.DEBUG else settings.ALLOWED_HOSTS[-1]
@@ -119,4 +160,8 @@ class UserAuthData(models.Model):
         send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
 
     def __unicode__(self):
+        """
+        Строковое представление объекта
+        :return: полное имя пользователя
+        """
         return self.user.get_full_name()

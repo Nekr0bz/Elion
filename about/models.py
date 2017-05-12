@@ -8,6 +8,9 @@ import datetime
 
 
 class AreasWork(models.Model):
+    """
+    Модель регионов обслуживания
+    """
     region = models.CharField(verbose_name='Регион', max_length=30)
 
     class Meta:
@@ -16,10 +19,17 @@ class AreasWork(models.Model):
         verbose_name_plural = 'Регионы обслуживания'
 
     def __unicode__(self):
+        """
+        Строковое представление объекта
+        :return: название региона
+        """
         return self.region
 
 
 class StaticDates(models.Model):
+    """
+    Модель отвечающая за информацию о фирме
+    """
     YEAR_CHOICES = []
     for r in range(1980, (datetime.datetime.now().year + 1)):
         YEAR_CHOICES.append((r, r))
@@ -32,7 +42,7 @@ class StaticDates(models.Model):
                                     verbose_name='Главная цель (миссия) компании')
 
     description_services = models.TextField('Общее описание услуг')
-    who_we_are1 = models.TextField('"Кто мы?" - первый абзац')
+    who_we_are1 = models.TextField('"Кто мы?" - первый абзац') #нету
     who_we_are2 = models.TextField('"Кто мы?" - второй абзац')
     value_company = models.TextField('Гордость компании')
 
@@ -42,13 +52,16 @@ class StaticDates(models.Model):
         verbose_name_plural = 'Статические данные'
 
     def __unicode__(self):
+        """
+        Строковое представление объекта
+        """
         return 'Статические данные сайта'
 
     def get_images_fields(self):
         return self.mission_img,
 
 
-class FourValuesCompany(models.Model):
+class FourValuesCompany(models.Model): #нет
     parent_static_dates = models.ForeignKey(StaticDates)
     number = models.IntegerField('Число')
     desc1 = models.CharField('Первая строка описания', max_length=20)
@@ -63,6 +76,9 @@ class FourValuesCompany(models.Model):
 
 
 class Employees(models.Model):
+    """
+    Модель сотрудников фирмы
+    """
     full_name = models.CharField('Полное имя', max_length=30)
     position = models.CharField('Должность', max_length=30)
     contact = models.CharField('Контактная информация', max_length=30, blank=True,
@@ -76,13 +92,19 @@ class Employees(models.Model):
         verbose_name_plural = 'Сотрудники'
 
     def __unicode__(self):
+        """
+        Строковое представление объекта
+        """
         return self.full_name
 
     def get_images_fields(self):
+        """
+        Получение всех полей отвечающих за изображения
+        """
         return self.avatar,
 
 
-class ValuesCompany(models.Model):
+class ValuesCompany(models.Model): #нет
     title_main = models.CharField('Главный заголовок', max_length=20)
     title_other = models.CharField('Второй заголовок', max_length=50)
     text = models.TextField('Описание')
