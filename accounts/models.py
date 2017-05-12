@@ -53,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=30,
         blank=True
     )
-    phone_number = PhoneNumberField('Номер телефона', blank=True)
+    phone_number = PhoneNumberField('Номер телефона', blank=True, null=True)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
