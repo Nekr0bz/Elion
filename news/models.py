@@ -8,6 +8,9 @@ from generic.signals import del_imgs__pre_delete, del_imgs__pre_save
 
 
 class News(models.Model):
+    """
+    Модель новостей
+    """
     title = models.CharField('Заголовок', max_length=80, unique_for_date='datetime')
     description = models.TextField('Краткое описание', max_length=200)
     img = models.ImageField(upload_to=SLUG_PATH, verbose_name='Путь к изображению', help_text='750x308px')
@@ -24,12 +27,23 @@ class News(models.Model):
         ordering = ['-datetime']
 
     def get_absolute_url(self):
+        """
+        Получение ссылки на новость
+        :return: url
+        """
         return reverse('news:detail', kwargs={'slug': self.slug})
 
     def get_images_fields(self):
+        """
+        Получение всех полей модели отвечающих за изображения
+        """
         return self.img,
 
     def __unicode__(self):
+        """
+        Строковое представление объекта
+        :return: заголовок новости
+        """
         return self.title
 
 

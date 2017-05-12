@@ -5,6 +5,9 @@ from accounts.models import User
 
 
 class GuestBook(models.Model):
+    """
+    Модель отзывов
+    """
     usr = models.ForeignKey(User, verbose_name='Пользователь')
     parent = models.OneToOneField('GuestBook', on_delete=models.CASCADE, blank=True, null=True)
     text = models.TextField(verbose_name='Содержание')

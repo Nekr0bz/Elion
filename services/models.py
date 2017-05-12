@@ -7,6 +7,9 @@ from generic.signals import del_imgs__pre_delete, del_imgs__pre_save
 
 
 class Service(models.Model):
+    """
+    Модель услуг
+    """
     title = models.CharField(max_length=50, unique=True, verbose_name='Заголовок')
     main_img = models.ImageField(upload_to='services/', verbose_name='Основное изображение', help_text='730х305px')
     content = RichTextUploadingField(verbose_name='Основное описание')
@@ -17,13 +20,23 @@ class Service(models.Model):
         db_table = 'Service'
 
     def get_images_fields(self):
+        """
+        Получение всех полей модели отвечающих за изображения
+        """
         return self.main_img,
 
     def __unicode__(self):
+        """
+        Строковое представление объекта
+        :return: название услуги
+        """
         return self.title
 
 
 class ServiceSubsections(models.Model):
+    """
+    Подразделы услуг
+    """
     SUB_SERVICE = (1, 'Дополнительный подраздел')
     EXT_DESCRIPTION = (2, 'Дополнительное описание')
     TYPE_CHOICES = (SUB_SERVICE, EXT_DESCRIPTION)
@@ -42,13 +55,18 @@ class ServiceSubsections(models.Model):
         ordering = ['type']
 
     def get_images_fields(self):
+        """
+        Получение всех полей модели отвечающих за изображения
+        """
         return self.img,
 
     def __unicode__(self):
+
         return self.title
 
 
 class FourServiceDirection(models.Model):
+    # нету
     title = models.CharField('Название', max_length=40)
     desc = models.TextField('Короткое описание', max_length=140)
     img = models.ImageField('Изображение', upload_to='services/directions/', help_text='154x142px')
@@ -62,6 +80,10 @@ class FourServiceDirection(models.Model):
         return self.img,
 
     def __unicode__(self):
+        """
+        Строковое представление объекта
+        :return: название подраздела
+        """
         return self.title
 
 

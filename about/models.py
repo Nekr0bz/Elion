@@ -99,7 +99,7 @@ class Employees(models.Model):
 
     def get_images_fields(self):
         """
-        Получение всех полей отвечающих за изображения
+        Получение всех полей модели отвечающих за изображения
         """
         return self.avatar,
 
