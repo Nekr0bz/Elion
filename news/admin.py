@@ -8,7 +8,6 @@ from .models import News
 from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 
-# TODO: доработать ckeditor
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'datetime']
     prepopulated_fields = {"slug": ("title",)}

@@ -38,7 +38,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, password, **extra_fields):
         """
-        Установка параметров при создании flvbybcnhfnjhf
+        Установка параметров при создании администратора
         :return: экземпляр модели пользователя
         """
         extra_fields.setdefault('is_staff', True)
@@ -115,7 +115,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class UserAuthDataManager(models.Manager):
     """
-    Менеджер для управления моделью отвечащая за активацию аккаунтов
+    Менеджер для управления моделью отвечающий за активацию аккаунтов
     """
     def create_profile(self, user):
         """
@@ -132,7 +132,7 @@ class UserAuthDataManager(models.Manager):
 
 class UserAuthData(models.Model):
     """
-    Модель отвечащая за активацию аккаунтов
+    Модель отвечающая за активацию аккаунтов
     """
     user = models.OneToOneField(User)
     activation_key = models.CharField(max_length=40, blank=True)
