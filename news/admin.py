@@ -9,6 +9,9 @@ from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 
 class NewsAdmin(admin.ModelAdmin):
+    """
+    Раздел данных о новостях
+    """
     list_display = ['title', 'slug', 'datetime']
     prepopulated_fields = {"slug": ("title",)}
     readonly_fields = ('image_thumb',)

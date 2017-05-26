@@ -13,6 +13,9 @@ class FourValuesCompanyInline(admin.TabularInline):
 
 
 class StaticDatesAdmin(admin.ModelAdmin):
+    """
+    Раздел данных отвечаюх за заполнение контента 
+    """
     readonly_fields = ('thumb_mission_img',)
     inlines = [FourValuesCompanyInline]
     fieldsets = [
@@ -31,6 +34,9 @@ class StaticDatesAdmin(admin.ModelAdmin):
 
 
 class EmployeesAdmin(admin.ModelAdmin):
+    """
+    Раздел данных о сотрудниках
+    """
     readonly_fields = ('thumb_avatar',)
     fields = ('full_name', 'position', 'contact', 'review', ('thumb_avatar', 'avatar'))
 

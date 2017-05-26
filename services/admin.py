@@ -8,6 +8,9 @@ from Elion.settings import THUMBNAIL_ALIASES as th_options
 
 
 class SubsectionsInline(admin.StackedInline):
+    """
+    Раздел данных подразделов услуг
+    """
     model = ServiceSubsections
     extra = 0
     readonly_fields = ('thumb_img',)
@@ -22,6 +25,9 @@ class SubsectionsInline(admin.StackedInline):
 
 
 class ServiceAdmin(admin.ModelAdmin):
+    """
+    Раздел данных услуг
+    """
     list_display = ['title']
     readonly_fields = ('thumb_main_img',)
     fields = ('title', 'content', ('thumb_main_img', 'main_img'))

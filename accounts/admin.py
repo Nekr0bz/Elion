@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
@@ -10,6 +11,9 @@ admin.site.unregister(Group)
 
 @admin.register(User)
 class ExtUserAdmin(UserAdmin):
+    """
+    Раздел данных о пользователях
+    """
     form = UserChangeForm
     add_form = UserCreationForm
     list_display = ('email', 'first_name', 'last_name', 'phone_number', 'is_staff')
