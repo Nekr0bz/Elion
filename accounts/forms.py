@@ -8,6 +8,9 @@ from .models import User, UserAuthData
 
 
 class UserCreationForm(forms.ModelForm):
+    """
+    Форма создания нового пользователя
+    """
     error_messages = {
         'password_mismatch': _("The two password fields didn't match."),
     }
@@ -28,6 +31,10 @@ class UserCreationForm(forms.ModelForm):
         fields = ("email",)
 
     def clean_password2(self):
+        """
+        Проверка подтверждения пароля
+        :return: Пароль
+        """
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
@@ -35,6 +42,10 @@ class UserCreationForm(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
+        """
+        Сохранение нового пользователя в БД
+        :return: Экземпляр пользователя
+        """
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         if commit:
@@ -43,6 +54,9 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
+    """
+    Форма обновления данных о пользователе
+    """
     password = auth_forms.ReadOnlyPasswordHashField(
         label=_("Password"),
         help_text=_(
@@ -57,6 +71,9 @@ class UserChangeForm(forms.ModelForm):
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):
+        """
+        Конструктор формы
+        """
         super(UserChangeForm, self).__init__(*args, **kwargs)
         f = self.fields.get('user_permissions')
         if f is not None:
@@ -69,6 +86,9 @@ class UserChangeForm(forms.ModelForm):
 
 
 class SignInForm(auth_forms.AuthenticationForm):
+    """
+    Форма авторизации
+    """
     error_messages = {
         'invalid_login': "Пользователя с таким email и паролем не существует ",
         'inactive': "Простите, но администрторы сайта вас заблокировали"
@@ -93,6 +113,9 @@ class SignInForm(auth_forms.AuthenticationForm):
 
 
 class SignUpForm(UserCreationForm):
+    """
+    Форма регистрации
+    """
     email = auth_forms.UsernameField(
         max_length=254,
         widget=forms.EmailInput(attrs={
@@ -131,6 +154,10 @@ class SignUpForm(UserCreationForm):
         fields = ("email", "first_name", "last_name")
 
     def save(self, commit=True):
+        """
+        Сохранение нового пользователя в БД
+        :return: Экземпляр пользователя
+        """
         user = super(SignUpForm, self).save(commit=False)
         user.is_active = False
         if commit:

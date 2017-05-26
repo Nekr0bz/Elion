@@ -10,6 +10,9 @@ from .models import AreasWork
 
 
 class ContactMessageForm(forms.Form):
+    """
+    Форма для связи с администрацией сайта
+    """
     name = forms.CharField(max_length=35, widget=forms.TextInput(attrs={
         'placeholder': 'Ваше Имя',
         'class': 'form-control name'
@@ -28,6 +31,10 @@ class ContactMessageForm(forms.Form):
     error_css_class = 'error'
 
     def _generate_message(self):
+        """
+        Формирование сообщение администрации
+        :return: Сообщение
+        """
         subject = self.cleaned_data['subject'].encode('utf-8')
         message = 'Имя: ' + self.cleaned_data['name'].encode('utf-8') + '\n'
         message += 'Email: ' + self.cleaned_data['email'].encode('utf-8') + '\n'
@@ -35,11 +42,17 @@ class ContactMessageForm(forms.Form):
         return subject, message
 
     def send_email(self):
+        """
+        Отправка соощения администрации
+        """
         (subject, message) = self._generate_message()
         send_mail(subject, message, settings.EMAIL_HOST_USER, ['nekr0b@yandex.ru'])
 
 
 class SubmitAppForm(forms.Form):
+    """
+    Форма оформления заявок
+    """
     other_region = {'0': 'Другая область'}
     other_service = {'0': 'Другая услгуа'}
     first_name = forms.CharField(max_length=35, label='Выше Имя',
@@ -75,6 +88,10 @@ class SubmitAppForm(forms.Form):
     error_css_class = 'error'
 
     def _generate_message(self):
+        """
+        Формирование сообщение администрации
+        :return: Сообщение
+        """
         subject = 'Заявка от пользователя сайта'
 
         form_service = self.cleaned_data['service']
@@ -93,5 +110,8 @@ class SubmitAppForm(forms.Form):
         return subject, message
 
     def send_email(self):
+        """
+        Отправка соощения администрации
+        """
         (subject, message) = self._generate_message()
         send_mail(subject, message, settings.EMAIL_HOST_USER, ['nekr0b@yandex.ru'])

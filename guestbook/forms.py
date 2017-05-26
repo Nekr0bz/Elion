@@ -5,6 +5,9 @@ from .models import GuestBook
 
 
 class GuestBookForm(forms.ModelForm):
+    """
+    Форма для написания отзывов
+    """
     text = forms.CharField(widget=forms.Textarea(attrs={
         'style': 'width :100%; height: 100px',
         'class': 'form-control',
