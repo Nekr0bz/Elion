@@ -34,7 +34,7 @@
                             <img class="img-responsive" src="{% thumbnail object.main_img 'srvc_main' %}" alt="image">
                             <h2>{{ object.title }}</h2>
                             {% autoescape off %}<p>{{ object.content }}</p>{% endautoescape %}
-                            {% for section in object.servicesections_set|filter_type:"1" %}
+                            {% for section in object.servicesubsections_set|filter_type:"1" %}
                                 <div class="market_strategy">
                                     <div class="market_title_holder {% cycle 'float_left' 'float_right' %}" style="min-height: 199px; padding: 0">
                                         <h3>{{ section.title }}</h3>
@@ -43,16 +43,16 @@
                                     <img class="img-responsive {% cycle 'float_right' 'float_left' %}" style="padding: 0" src="{% thumbnail section.img 'section_srvc' %}" alt="">
                                 </div>
                             {% endfor %}
-                            {% if object.servicesections_set|filter_type:"2" %}
+                            {% if object.servicesubsections_set|filter_type:"2" %}
                             <div class="clear_fix"></div>
                             <div class="bottom_tab" style="padding: 0">
                                 <ul class="nav nav-tabs">
-                                {% for section in object.servicesections_set|filter_type:"2" %}
+                                {% for section in object.servicesubsections_set|filter_type:"2" %}
                                         <li{% if forloop.first %} class="active"{% endif %}><a data-toggle="tab" href="#s{{section.id}}">{{ section.title }}</a></li>
                                 {% endfor %}
                                 </ul>
                                 <div class="tab-content bottom_tab_info" style="min-height: 220px">
-                                {% for section in object.servicesections_set|filter_type:"2" %}
+                                {% for section in object.servicesubsections_set|filter_type:"2" %}
                                     <div id="s{{section.id}}" class="tab-pane fade {% if forloop.first %} in active {% endif %}">
                                         <img class="img-responsive" src="{% thumbnail section.img 'section_desc' %}" alt="">
                                         {% autoescape off %}<p>{{ section.content }}</p>{% endautoescape %}
