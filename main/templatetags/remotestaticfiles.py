@@ -13,4 +13,7 @@ def remote_static(path):
     :return: URL
     """
     host = settings.ALLOWED_HOSTS[-1]
-    return 'http://'+host+'/static/'+path
+    if settings.DEBUG:
+        return '/static/'+path
+    else:
+        return 'http://'+host+'/static/'+path
