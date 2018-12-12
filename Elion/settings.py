@@ -21,7 +21,7 @@ SECRET_KEY = 'w*-f#h*y(g0lc+c3%elgef03hlz(#k^!yn8aa1h4p-&o!*!ugo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'nekr0bz.myjino.ru']
+ALLOWED_HOSTS = ['127.0.0.1', 'nekr0bz.myjino.ru'] # TODO: убрать
 
 
 # Application definition
