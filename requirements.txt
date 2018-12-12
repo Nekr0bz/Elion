@@ -1,4 +1,4 @@
-Django==1.11.6
+Django==1.11.15
 django-phonenumber-field==1.1.0
 easy-thumbnails==2.4.2
 phonenumberslite==8.2.0
